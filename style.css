@@ -1,7 +1,43 @@
 
 * {
+	font-size:17px;
+	line-height:200%;
+	color: #191A42;
+	font-family:lexend;
+}
+
+li.suplistlink {
+    font-size: 20px;
+    border-left: 3px solid #4e9048;
+    padding-left: 11px;
+    font-size: 20px;
+    margin-bottom: 60px;
+    color: white;
+
+}
+
+h1 {
+	font-size:24px;
+	line-height:200%;
+	color: #191A42;
+	font-family:lexend;
+}
+
+h2 {
 	font-size:20px;
 	line-height:200%;
 	color: #191A42;
-	font-family:monospace;
+	font-family:lexend;
+}
+
+.para {
+    display: inline-block;
+    width: 70%;
+}
+
+#prez {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    
 }
