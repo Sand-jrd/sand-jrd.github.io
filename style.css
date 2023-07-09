@@ -17,11 +17,15 @@ li.suplistlink {
 
 }
 
-h1 {
+#hello {
 	font-size:24px;
 	line-height:200%;
-	color: #191A42;
+	color: white;
 	font-family:lexend;
+    font-weight: bolder;
+    padding-left : 10px;
+	background-color: #005fb2;
+	width: fit-content;
 }
 
 h2 {
@@ -29,6 +33,7 @@ h2 {
 	line-height:200%;
 	color: #191A42;
 	font-family:lexend;
+	width: fit-content;
 }
 
 .para {
@@ -38,16 +43,39 @@ h2 {
 
 #prez {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 20px;
+    grid-template-columns: 50% 30%;
+    grid-gap: 5%;
     
 }
 
 #public {
-    display: inline-flex;
     height: 300px;
     width: 70%;
+    display: inline-flex;
     overflow: scroll;
-    white-space: nowrap;
-    
+    position: absolute;
+}
+
+#publicflow-left{
+    position: absolute;
+    height: 300px;
+    width: 300px;
+    /* padding-left: 72%; */
+    background-image: linear-gradient(to right, white 0%,transparent 11%);
+}
+#publicflow-right{
+    position: absolute;
+    height: 300px;
+    margin-left: 61%;
+    /* margin-left: -4%; */
+    width: 100px;
+    background-image: linear-gradient(to right, transparent 50%, white 100%);
+}
+
+.container {
+height: 300px;
+}
+
+.sec {
+width: fit-content;
 }
