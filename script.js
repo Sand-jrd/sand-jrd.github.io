@@ -37,7 +37,6 @@ $(document).ready(function() {
     for (var i = 0; i < document.getElementsByClassName("rounded").length; i++) {
         document.getElementsByClassName("rounded")[i].style.width = (max+50)+'px';
     };
-    document.getElementById("hello").style.width = (max+40)+'px';
 
     
 });
@@ -59,5 +58,3 @@ function autoScroll () {
  };
  
  autoScroll();
-
-
