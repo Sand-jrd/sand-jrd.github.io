@@ -12,6 +12,15 @@ body{
     margin-right: 5%;
 }
 
+.inside{
+    height: 400px;  
+    overflow: scroll;
+    width: fit-content;
+    background-color: #fafafa;
+    box-shadow: inset 0px 0px 10px rgba(0,0,0,0.9);
+    margin-bottom: 50px;
+}
+
 li.suplistlink {
     font-size: 20px;
     border-left: 3px solid #4e9048;
@@ -20,6 +29,42 @@ li.suplistlink {
     margin-bottom: 60px;
     list-style-type: none;
 
+}
+
+#ADS li{
+    display: grid;
+    width: 100%;
+    grid-template-columns: [title] 90% [year] 10px;
+    grid-template-rows: [titledate] fit-content(35px) [authors] 31px;
+    margin-bottom: 30px;
+}
+
+.title{
+  color: #a60718;
+  grid-area: titledate / title;
+  text-decoration: none;
+}
+
+.year{
+  grid-area: titledate / year;
+}
+
+
+.author{
+  grid-area: authors/ title;
+  border-bottom: 2px solid #a7a7c4ba;
+  color: #4a4a4a;
+}
+
+
+.rounded {
+    border: 0px;
+    position: absolute;
+    margin-top: -21px;
+    background-color: rgb(255, 195, 54);
+    width: 319px;
+    height: 4px;
+    box-shadow: 0px 2px 3px #9c8a8a6b;
 }
 
 #hello {
@@ -41,6 +86,13 @@ li.suplistlink {
     z-index: -1;
     inset: 0px -100vw;
     position: absolute;
+    box-shadow: 0px 5px 5px #9c8a8a6b;
+}
+.rounded::before {
+    background-image: linear-gradient(to bottom, black 0%,transparent 10%);
+    content: "";
+    height:
+
 }
 
 h2 {
