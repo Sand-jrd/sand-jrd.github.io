@@ -9,13 +9,24 @@
 
 body{
     margin-top: 0;
-    margin-right: 5%;
+     margin-left: 6%;
+     }
+
+.inside-container{
+    height: 400px;
+    width: 80%;
+    background-color: #fafafa;
+    box-shadow: inset 0px 0px 10px rgba(0,0,0,0.9);
+    margin-bottom: 50px;
+}
+
+.para{
+    width:80%
 }
 
 .inside{
-    height: 400px;  
     overflow: scroll;
-    width: fit-content;
+    height: 400px;  
     background-color: #fafafa;
     box-shadow: inset 0px 0px 10px rgba(0,0,0,0.9);
     margin-bottom: 50px;
@@ -28,7 +39,11 @@ li.suplistlink {
     font-size: 20px;
     margin-bottom: 60px;
     list-style-type: none;
+}
 
+ul.uplistlink {
+    background-color: #f0f8f4;
+    width: 70%;
 }
 
 #ADS li{
@@ -37,7 +52,18 @@ li.suplistlink {
     grid-template-columns: [title] 90% [year] 10px;
     grid-template-rows: [titledate] fit-content(35px) [authors] 31px;
     margin-bottom: 30px;
+    cursor:pointer;
 }
+
+#ADS .firstAuthor{
+    display: grid;
+    width: 100%;
+    grid-template-columns: [title] 90% [year] 10px;
+    grid-template-rows: [titledate] fit-content(35px) [authors] 31px;
+    margin-bottom: 30px;
+    cursor:pointer;
+}
+
 
 .title{
   color: #a60718;
@@ -47,6 +73,10 @@ li.suplistlink {
 
 .year{
   grid-area: titledate / year;
+}
+
+.buttomHidden{
+    color: #a5a597;
 }
 
 
@@ -73,10 +103,13 @@ li.suplistlink {
 	color: white;
 	font-family:lexend;
     font-weight: bolder;
-    padding-left : 10px;
+    padding-left : 6%;
+    margin-left: calc(-6% - 2px); /*To compansate margin from body*/
+    overflow: hidden;
     margin-top: 0px;
 	background-color: #005fb2;
     width: 100vw;
+    overflow-y: hidden;
     position: relative;
 }
 
@@ -84,6 +117,7 @@ li.suplistlink {
 	background-color: #005fb2;
     content: "";
     z-index: -1;
+    overflow-y: hidden;
     inset: 0px -100vw;
     position: absolute;
     box-shadow: 0px 5px 5px #9c8a8a6b;
@@ -115,25 +149,40 @@ h2 {
     
 }
 
+.bandeau{
+    display: flex;
+    padding: 3px;
+}
+
+
 #public {
     height: 300px;
     width: 70%;
     display: inline-flex;
     overflow: scroll;
     position: absolute;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
 }
 
-#publicflow-left{
-    position: absolute;
-    height: 300px;
-    width: 300px;
-    /* padding-left: 72%; */
-    background-image: linear-gradient(to right, white 0%,transparent 11%);
+#public::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
 }
+
+@keyframes bannermove {
+  0% {
+      transform: translate(0, 0);
+  }
+  100% {
+      transform: translate(-50%, 0);
+  }
+}
+
 #publicflow-right{
     position: absolute;
     height: 300px;
-    width: 70%;
+    margin-left: -2px;
+    width: calc(70% + 3px);
     pointer-events: none; 
     background-image: linear-gradient(to right, white 0%,transparent 11% , transparent 89%, white 100%);
 }

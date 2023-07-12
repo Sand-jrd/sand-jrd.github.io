@@ -27,7 +27,7 @@ My name is Sandrine Juillard, and I am currently pursuing my PhD at the Universi
     color: #ffc336; 
 ">Context on my research project</h2>
 <hr class="rounded"" style="
-    background-color: ffc336>
+    background-color: ffc336">
 
 <div class="para">
 <p>
@@ -52,12 +52,18 @@ The goal of my research project can be summarized by the following three main ax
     color: #a60618;
 ">My publications</h2>
 <hr class="rounded" style="
-    background-color: #a60618;>
+    background-color: #a60618;">
 
 <p class="normalp">List of things I published/contributed to on NASA/ADS: <a class="inlinelink" href="https://ui.adsabs.harvard.edu/search/q=author%3A%22Juillard%2C%20Sandrine%22&amp;sort=date%20desc%2C%20bibcode%20desc&amp;p_=0">here</a></p>
-  
-<div class="inside">
-<ul id="ADS"> </ul></div>
+
+<div class="inside-container">
+
+    <div class="bandeau"><input type="button" value="First author" onClick="FirstAuthor();" id="FirstAuthor"><input type="button" value="All" onClick="All();" id="All" class="buttomHidden"><input type="button" value="<" onClick="prev();"><input type="button" value=">" onClick="suiv();"></div>
+    
+    <div class="inside">
+        <ul id="ADS"> </ul>
+    </div>
+</div>
 
 <div class="container">
 <div id="public" onScroll="handleOnScroll();">
@@ -66,6 +72,13 @@ The goal of my research project can be summarized by the following three main ax
 <img src="https://s3.amazonaws.com/adsabs-thumbnails/seri/MNRAS/0522/slad027/slad027fig1.jpeg" style="display: flex;">
 <img src="https://s3.amazonaws.com/adsabs-thumbnails/seri/MNRAS/0522/slad027/slad027figa1.jpeg" style="display: flex;">
 <img src="https://s3.amazonaws.com/adsabs-thumbnails/seri/A%2BA/0668/aa44402-22/aa44402-22-fig7.jpg" style="display: flex;">
+
+<img src="https://s3.amazonaws.com/adsabs-thumbnails/seri/A%2BA/0668/aa44402-22/aa44402-22-fig1.jpg" style="display: flex;">
+<img src="https://s3.amazonaws.com/adsabs-thumbnails/seri/A%2BA/0668/aa44402-22/aa44402-22-fig2.jpg" style="display: flex;">
+<img src="https://s3.amazonaws.com/adsabs-thumbnails/seri/MNRAS/0522/slad027/slad027fig1.jpeg" style="display: flex;">
+<img src="https://s3.amazonaws.com/adsabs-thumbnails/seri/MNRAS/0522/slad027/slad027figa1.jpeg" style="display: flex;">
+<img src="https://s3.amazonaws.com/adsabs-thumbnails/seri/A%2BA/0668/aa44402-22/aa44402-22-fig7.jpg" style="display: flex;">
+
 </div>
   <div id="publicflow-right"></div> 
 
@@ -75,7 +88,7 @@ The goal of my research project can be summarized by the following three main ax
     color: #4f944a;
 ">My code</h2>
 <hr class="rounded" style="
-    background-color: #4f944a;>
+    background-color: #4f944a;">
 
 <ul class="suplistlink">
 

@@ -2,6 +2,7 @@
 
 
 query = "q=author%3AJuillard%2C+Sandrine&fl=title%2C+author%2C+bibcode%2C+year&rows=6";
+function href(adress){window.location=adress;}
 
 $(document).ready(function() {
     $.ajax({
@@ -18,6 +19,7 @@ $(document).ready(function() {
             for (var i=0;i<json.length;++i)
             {
                 var publication_i = document.createElement("li");
+
                 for (var k=0;k<info_type.length;++k){
                 
                     // Content from JSON
@@ -26,36 +28,71 @@ $(document).ready(function() {
                     
                     if (info == "title"){
                         content = content[0];
-                        var adress = "https://ui.adsabs.harvard.edu/abs/"+json[i]['bibcode']+"/abstract";
+                        var adress = "'https://ui.adsabs.harvard.edu/abs/"+json[i]['bibcode']+"/abstract'";
                     }
                     if (info == "author"){
+                    
+                        // Parse author list
                         var tmp_content = content.splice(0, 3);
                         if(content.length > 3){
                             tmp_content.push("et al.");
                         }
                         tmp_content.join(',    ');
                         content = tmp_content;
+                        
+                        // Mark first author as class element
+                        if (content[0].includes("Juillard")){
+                            publication_i.classList.add("firstAuthor");
+                        }
+                            
+
                     }
                     
                     // Create div
-                    if (info == "title"){
-                        var ele = document.createElement("a");
-                        ele.setAttribute("href", adress);
-                    }else {
-                        var ele = document.createElement("div");
-                    }
+                    var ele = document.createElement("div");
                     ele.classList.add(info);
                     ele.appendChild(document.createTextNode(content));
                     publication_i.appendChild(ele);
-                      
+                     
+                    publication_i.setAttribute("onclick", 'href('+adress+')');
                     document.getElementById("ADS").appendChild(publication_i);
+
                     }
             }
 
         },
     })
 });
-    
+
+function FirstAuthor(){
+
+    var public_list = document.getElementById("ADS").children;
+    for (var k=0;k<public_list.length;++k){
+        var ele = public_list[k];
+        if (!ele.classList.contains("firstAuthor")){
+            ele.style.display = "none";
+            
+        }
+    }
+    document.getElementById("FirstAuthor").className = "buttomHidden";
+    document.getElementById("All").className = "";
+
+}
+
+function All(){
+    var public_list = document.getElementById("ADS").children;
+    for (var k=0;k<public_list.length;++k){
+        var ele = public_list[k];
+        ele.style.display = "grid";
+    }
+    document.getElementById("All").className = "buttomHidden";
+    document.getElementById("FirstAuthor").className = "";
+
+}
+
+function suiv(){alert("Not implemented");}
+function prev(){alert("Not implemented");}
+
 
 // -------- Line under titles --------
 
@@ -84,9 +121,13 @@ var scrollHandler = null;
   
 function autoScroll () {
     clearInterval(scrollHandler);
+    var endscroll = document.getElementById("public").scrollWidth/2;
     scrollHandler = setInterval(function() {
-      var nextScroll = document.getElementById("public").scrollLeft += 1;
+      document.getElementById("public").scrollLeft += 1;
     },1);
+    if (document.getElementById("public").scrollLeft > endscroll+500){
+        document.getElementById("public").scrollLeft -= endscroll;
+    }
 }
 
  function handleOnScroll () {
@@ -95,3 +136,8 @@ function autoScroll () {
  };
  
  autoScroll();
+ 
+ 
+ 
+ 
+ 
