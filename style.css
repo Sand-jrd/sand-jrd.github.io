@@ -97,14 +97,16 @@ ul.uplistlink {
     box-shadow: 0px 2px 3px #9c8a8a6b;
 }
 
-#hello {
+#head-band {
+    display: inline-flex;
+    justify-content: space-between;
 	font-size:24px;
 	line-height:200%;
 	color: white;
 	font-family:lexend;
     font-weight: bolder;
     padding-left : 6%;
-    margin-left: calc(-6% - 2px); /*To compansate margin from body*/
+    margin-left: -7%; /*To compansate margin from body*/
     overflow: hidden;
     margin-top: 0px;
 	background-color: #005fb2;
@@ -113,7 +115,18 @@ ul.uplistlink {
     position: relative;
 }
 
-#hello::before{
+
+#hello {
+	font-size:24px;
+	line-height:200%;
+	color: white;
+	font-family:lexend;
+    font-weight: bolder;
+    padding-left : 6%;
+    margin-left: calc(-6% - 2px); /*To compansate margin from body*/
+}
+
+#head-band:before{
 	background-color: #005fb2;
     content: "";
     z-index: -1;
@@ -191,6 +204,41 @@ h2 {
 height: 300px;
 }
 
+#gotmini{
+    right: 32px;
+    top: 82px;
+    position: fixed;
+    text-shadow: 1px 1px 2px black;
+}
+
+#goto {
+    position: fixed;
+    display: inline-grid;
+    right: 16px;
+    z-index: 2;
+    background: #e3e3e396;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 25px;
+    padding: 20px;
+    text-shadow: 1px 1px 3px black;
+}
+
 .sec {
 width: fit-content;
 }
+
+#github{
+    margin-right: 10%;
+    display: flex;
+    align-content: flex-end;
+    align-items: center;
+    justify-content: space-between;
+}
+#github p{
+    color: white;
+    padding-right: 10px;
+}
+#github img{
+    height: 30px;
+    }

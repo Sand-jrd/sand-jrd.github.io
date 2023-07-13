@@ -1,7 +1,6 @@
 // -------- List of publication --------
 
-
-query = "q=author%3AJuillard%2C+Sandrine&fl=title%2C+author%2C+bibcode%2C+year&rows=6";
+query = "q=author%3AJuillard%2C+Sandrine&fl=title%2C+author%2C+bibcode%2C+year%2C+doctype&rows=40";
 function href(adress){window.location=adress;}
 
 $(document).ready(function() {
@@ -16,7 +15,7 @@ $(document).ready(function() {
             
             var json = JSON.parse(data)['response']['docs'];
             var info_type = ["title", "year", "author"];
-            for (var i=0;i<json.length;++i)
+            for (var i=0;i<json.length-1;++i)
             {
                 var publication_i = document.createElement("li");
 
@@ -43,21 +42,22 @@ $(document).ready(function() {
                         // Mark first author as class element
                         if (content[0].includes("Juillard")){
                             publication_i.classList.add("firstAuthor");
-                        }
                             
-
+                        }
+                        
                     }
-                    
+                
                     // Create div
                     var ele = document.createElement("div");
                     ele.classList.add(info);
                     ele.appendChild(document.createTextNode(content));
                     publication_i.appendChild(ele);
-                     
-                    publication_i.setAttribute("onclick", 'href('+adress+')');
-                    document.getElementById("ADS").appendChild(publication_i);
+                }
+                
+                publication_i.classList.add(json[i]["doctype"]);
+                publication_i.setAttribute("onclick", 'href('+adress+')');
+                document.getElementById("ADS").appendChild(publication_i);
 
-                    }
             }
 
         },
@@ -65,21 +65,65 @@ $(document).ready(function() {
 });
 
 function FirstAuthor(){
-
-    var public_list = document.getElementById("ADS").children;
-    for (var k=0;k<public_list.length;++k){
-        var ele = public_list[k];
-        if (!ele.classList.contains("firstAuthor")){
-            ele.style.display = "none";
-            
+    
+    if (document.getElementById("FirstAuthor").classList.contains("buttomHidden")){
+        var public_list = document.getElementById("ADS").children;
+        for (var k=0;k<public_list.length;++k){
+            var ele = public_list[k];
+            if (!ele.classList.contains("firstAuthor")){
+                ele.style.display = "grid";
+            }
+        }
+        document.getElementById("FirstAuthor").className = "";
+        if (!document.getElementById("Journal").classList.contains("buttomHidden")){
+            document.getElementById("All").className = "buttomHidden";
         }
     }
-    document.getElementById("FirstAuthor").className = "buttomHidden";
-    document.getElementById("All").className = "";
+    else{
+        var public_list = document.getElementById("ADS").children;
+        for (var k=0;k<public_list.length;++k){
+            var ele = public_list[k];
+            if (!ele.classList.contains("firstAuthor")){
+                ele.style.display = "none";
+                
+            }
+        }
+        document.getElementById("FirstAuthor").className = "buttomHidden";
+        document.getElementById("All").className = "";
+    }
+}
 
+function Journal(){
+
+    if (document.getElementById("Journal").classList.contains("buttomHidden")){
+        var public_list = document.getElementById("ADS").children;
+        for (var k=0;k<public_list.length;++k){
+            var ele = public_list[k];
+            if (!ele.classList.contains("article")){
+                ele.style.display = "grid";
+            }
+        }
+        document.getElementById("Journal").className = "";
+        if (!document.getElementById("FirstAuthor").classList.contains("buttomHidden")){
+            document.getElementById("All").className = "buttomHidden";
+        }
+    }
+    else{
+        var public_list = document.getElementById("ADS").children;
+        for (var k=0;k<public_list.length;++k){
+            var ele = public_list[k];
+            if (!ele.classList.contains("article")){
+                ele.style.display = "none";
+                
+            }
+        }
+        document.getElementById("Journal").className = "buttomHidden";
+        document.getElementById("All").className = "";
+    }
 }
 
 function All(){
+
     var public_list = document.getElementById("ADS").children;
     for (var k=0;k<public_list.length;++k){
         var ele = public_list[k];
@@ -87,11 +131,32 @@ function All(){
     }
     document.getElementById("All").className = "buttomHidden";
     document.getElementById("FirstAuthor").className = "";
+    document.getElementById("Journal").className = "";
+
 
 }
 
 function suiv(){alert("Not implemented");}
 function prev(){alert("Not implemented");}
+
+function gotmini(){
+
+    var bar = document.getElementById("goto");
+    if (!bar.classList.contains("minigoto")){
+        for (var i = 0; i < bar.getElementsByClassName("linktosec").length; i++) {
+            bar.getElementsByClassName("linktosec")[i].style.display = "none";
+        }
+        bar.className = "minigoto";
+    }else{
+        for (var i = 0; i < bar.getElementsByClassName("linktosec").length; i++) {
+            bar.getElementsByClassName("linktosec")[i].style.display = "initial";
+        }
+        bar.className = "";
+    }
+}
+
+function gotosec(id){document.getElementById(id).scrollIntoView();}
+
 
 
 // -------- Line under titles --------
@@ -115,6 +180,29 @@ $(document).ready(function() {
     
 });
 
+// -------- Quick goto --------
+
+$(document).ready(function() {
+
+    var bar = document.getElementById("goto");
+    
+        for (var i = 0; i < document.getElementsByClassName("sec").length; i++) {
+        
+            var name = document.getElementsByClassName("sec")[i].id;
+            var color = document.getElementsByClassName("sec")[i].style.color;
+            
+            var ele = document.createElement("div");
+            ele.setAttribute('class', 'linktosec');
+            ele.setAttribute('onClick', "gotosec('"+name+"');");
+            ele.style.color = color;
+
+            ele.appendChild(document.createTextNode(name));
+            bar.appendChild(ele);
+        };
+
+});
+
+
 // -------- Srcoll of images --------
 
 var scrollHandler = null;
@@ -135,7 +223,9 @@ function autoScroll () {
   setTimeout(autoScroll, 200);
  };
  
- autoScroll();
+$(document).ready(function() {
+    autoScroll();
+});
  
  
  
