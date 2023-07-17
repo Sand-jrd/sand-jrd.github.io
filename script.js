@@ -71,10 +71,12 @@ function FirstAuthor(){
         for (var k=0;k<public_list.length;++k){
             var ele = public_list[k];
             if (!ele.classList.contains("firstAuthor")){
-                ele.style.display = "grid";
+                if (ele.classList.contains("article") || !document.getElementById("Journal").classList.contains("buttomHidden")){
+                    ele.style.display = "grid";
+                }
             }
         }
-        document.getElementById("FirstAuthor").className = "";
+        document.getElementById("FirstAuthor").className = "buttomVisible";
         if (!document.getElementById("Journal").classList.contains("buttomHidden")){
             document.getElementById("All").className = "buttomHidden";
         }
@@ -85,11 +87,10 @@ function FirstAuthor(){
             var ele = public_list[k];
             if (!ele.classList.contains("firstAuthor")){
                 ele.style.display = "none";
-                
             }
         }
         document.getElementById("FirstAuthor").className = "buttomHidden";
-        document.getElementById("All").className = "";
+        document.getElementById("All").className = "buttomVisible";
     }
 }
 
@@ -100,10 +101,12 @@ function Journal(){
         for (var k=0;k<public_list.length;++k){
             var ele = public_list[k];
             if (!ele.classList.contains("article")){
-                ele.style.display = "grid";
+                if (ele.classList.contains("firstAuthor") || !document.getElementById("FirstAuthor").classList.contains("buttomHidden")){
+                    ele.style.display = "grid";
+                }
             }
         }
-        document.getElementById("Journal").className = "";
+        document.getElementById("Journal").className = "buttomVisible";
         if (!document.getElementById("FirstAuthor").classList.contains("buttomHidden")){
             document.getElementById("All").className = "buttomHidden";
         }
@@ -118,7 +121,7 @@ function Journal(){
             }
         }
         document.getElementById("Journal").className = "buttomHidden";
-        document.getElementById("All").className = "";
+        document.getElementById("All").className = "buttomVisible";
     }
 }
 
@@ -130,8 +133,8 @@ function All(){
         ele.style.display = "grid";
     }
     document.getElementById("All").className = "buttomHidden";
-    document.getElementById("FirstAuthor").className = "";
-    document.getElementById("Journal").className = "";
+    document.getElementById("FirstAuthor").className = "buttomVisible";
+    document.getElementById("Journal").className = "buttomVisible";
 
 
 }

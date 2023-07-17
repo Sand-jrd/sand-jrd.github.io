@@ -9,9 +9,21 @@
 
 body{
     margin-top: 0;
-     margin-left: 6%;
-     }
+    margin-left: 6%;
+    margin-right: 0;
+    overflow-x: hidden;
 
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+ }
+ 
+ 
+
+}
+
+#public::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
 .inside-container{
     height: 400px;
     width: 80%;
@@ -76,9 +88,21 @@ ul.uplistlink {
 }
 
 .buttomHidden{
+    border:  1px solid black;
+    backround: non;
     color: #a5a597;
-}
+    box-shadow: inset 0px 0px 3px black;
+        border-radius: 25px;
 
+}
+.buttomVisible{
+    border: 1px solid black;
+    backround: non;
+    border-radius: 25px;
+    color: black;
+    box-shadow: 0px 0px 3px black;
+    
+}
 
 .author{
   grid-area: authors/ title;
@@ -105,12 +129,12 @@ ul.uplistlink {
 	color: white;
 	font-family:lexend;
     font-weight: bolder;
-    padding-left : 6%;
+    padding-left: 5px;
     margin-left: -7%; /*To compansate margin from body*/
     overflow: hidden;
     margin-top: 0px;
 	background-color: #005fb2;
-    width: 100vw;
+    width: 107%;
     overflow-y: hidden;
     position: relative;
 }
@@ -123,7 +147,6 @@ ul.uplistlink {
 	font-family:lexend;
     font-weight: bolder;
     padding-left : 6%;
-    margin-left: calc(-6% - 2px); /*To compansate margin from body*/
 }
 
 #head-band:before{
@@ -205,8 +228,8 @@ height: 300px;
 }
 
 #gotmini{
-    right: 32px;
-    top: 82px;
+    right: 26px;
+    top: 62px;
     position: fixed;
     text-shadow: 1px 1px 2px black;
 }
@@ -216,12 +239,12 @@ height: 300px;
     display: inline-grid;
     right: 16px;
     z-index: 2;
-    background: #e3e3e396;
+    background: #fffffff6;
     width: fit-content;
     height: fit-content;
     border-radius: 25px;
-    padding: 20px;
-    text-shadow: 1px 1px 3px black;
+    padding: 12px;
+    border: 4px solid #828686;
 }
 
 .sec {
