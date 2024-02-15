@@ -192,7 +192,7 @@ function gotosec(id){
             button.innerHTML = response;
         }
     });
-
+}
 // -------- Srcoll of images --------
 
 var scrollHandler = null;
