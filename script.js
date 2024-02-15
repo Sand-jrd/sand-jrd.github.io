@@ -142,26 +142,6 @@ function All(){
 function suiv(){alert("Not implemented");}
 function prev(){alert("Not implemented");}
 
-function gotmini(){
-
-    var bar = document.getElementById("goto");
-    if (!bar.classList.contains("minigoto")){
-        for (var i = 0; i < bar.getElementsByClassName("linktosec").length; i++) {
-            bar.getElementsByClassName("linktosec")[i].style.display = "none";
-        }
-        bar.className = "minigoto";
-    }else{
-        for (var i = 0; i < bar.getElementsByClassName("linktosec").length; i++) {
-            bar.getElementsByClassName("linktosec")[i].style.display = "initial";
-        }
-        bar.className = "";
-    }
-}
-
-function gotosec(id){document.getElementById(id).scrollIntoView();}
-
-
-
 // -------- Line under titles --------
 
 $(document).ready(function() {
@@ -183,28 +163,35 @@ $(document).ready(function() {
     
 });
 
-// -------- Quick goto --------
+
+// -------- Nav bar --------
 
 $(document).ready(function() {
 
-    var bar = document.getElementById("goto");
-    
-        for (var i = 0; i < document.getElementsByClassName("sec").length; i++) {
-        
-            var name = document.getElementsByClassName("sec")[i].id;
-            var color = document.getElementsByClassName("sec")[i].style.color;
-            
-            var ele = document.createElement("div");
-            ele.setAttribute('class', 'linktosec');
-            ele.setAttribute('onClick', "gotosec('"+name+"');");
-            ele.style.color = color;
+const button = document.getElementById('currentpage');
 
-            ele.appendChild(document.createTextNode(name));
-            bar.appendChild(ele);
-        };
+    $.ajax({
+        url: "pages/into.html", 
+        context: document.body,
+        success: function(response) {
+            button.innerHTML = response;
+        }
+    });
 
 });
 
+function gotosec(id){
+    const button = document.getElementById('currentpage');
+
+    surl="publi.html"
+
+    $.ajax({
+        url: surl, 
+        context: document.body,
+        success: function(response) {
+            button.innerHTML = response;
+        }
+    });
 
 // -------- Srcoll of images --------
 
