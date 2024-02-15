@@ -3,7 +3,7 @@
 query = "q=author%3AJuillard%2C+Sandrine&fl=title%2C+author%2C+bibcode%2C+year%2C+doctype&rows=40";
 function href(adress){window.location=adress;}
 
-$(document).ready(function() {
+function loadpub(){
     $.ajax({
         url: 'https://corsproxy.io/?https://api.adsabs.harvard.edu/v1/search/query?'+query,
         beforeSend: function(xhr) {
@@ -12,9 +12,10 @@ $(document).ready(function() {
         dataType: "text",       
         headers: {'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS', 'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'},
         success: function(data){
-            
+           
             var json = JSON.parse(data)['response']['docs'];
             var info_type = ["title", "year", "author"];
+
             for (var i=0;i<json.length-1;++i)
             {
                 var publication_i = document.createElement("li");
@@ -25,6 +26,7 @@ $(document).ready(function() {
                     var info = info_type[k]
                     var content = json[i][info]
                     
+
                     if (info == "title"){
                         content = content[0];
                         var adress = "'https://ui.adsabs.harvard.edu/abs/"+json[i]['bibcode']+"/abstract'";
@@ -62,7 +64,7 @@ $(document).ready(function() {
 
         },
     })
-});
+};
 
 function FirstAuthor(){
     
@@ -198,6 +200,10 @@ function gotosec(link){
 
     var newpage = document.getElementById(link)
     newpage.className = "active";
+
+    if (link == "publi"){
+        loadpub()
+    }
 
 
 }
