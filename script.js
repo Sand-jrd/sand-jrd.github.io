@@ -83,7 +83,9 @@ function FirstAuthor(){
             var ele = public_list[k];
             if (!ele.classList.contains("firstAuthor")){
                 if (ele.classList.contains("article") || !document.getElementById("Journal").classList.contains("buttomHidden")){
-                    ele.style.display = "grid";
+                    if (ele.className != "loader"){
+                        ele.style.display = "grid";
+                    }
                 }
             }
         }
@@ -113,7 +115,9 @@ function Journal(){
             var ele = public_list[k];
             if (!ele.classList.contains("article")){
                 if (ele.classList.contains("firstAuthor") || !document.getElementById("FirstAuthor").classList.contains("buttomHidden")){
-                    ele.style.display = "grid";
+                    if (ele.className != "loader"){
+                        ele.style.display = "grid";
+                    }
                 }
             }
         }
@@ -141,7 +145,9 @@ function All(){
     var public_list = document.getElementById("ADS").children;
     for (var k=0;k<public_list.length;++k){
         var ele = public_list[k];
-        ele.style.display = "grid";
+        if (ele.className != "loader"){
+            ele.style.display = "grid";
+        }
     }
     document.getElementById("All").className = "buttomHidden";
     document.getElementById("FirstAuthor").className = "buttomVisible";
