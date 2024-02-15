@@ -5,6 +5,8 @@ function href(adress){window.location=adress;}
 
 function loadpub(){
 
+    var loader = document.getElementsByClassName('loader')[0];
+    loader.style.display = "block";
 
     $.ajax({
         url: 'https://corsproxy.io/?https://api.adsabs.harvard.edu/v1/search/query?'+query,
@@ -15,8 +17,7 @@ function loadpub(){
         headers: {'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS', 'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'},
         success: function(data){
             var loader = document.getElementsByClassName('loader')[0];
-            loader.style.display = "block";
-        
+
         
             var json = JSON.parse(data)['response']['docs'];
             var info_type = ["title", "year", "author"];

@@ -138,6 +138,9 @@ ul.uplistlink {
   color: #4a4a4a;
 }
 
+.loader{
+    display: block;
+}
 
 .rounded {
     border: 0px;
