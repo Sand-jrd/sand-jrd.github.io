@@ -4,6 +4,8 @@ query = "q=author%3AJuillard%2C+Sandrine&fl=title%2C+author%2C+bibcode%2C+year%2
 function href(adress){window.location=adress;}
 
 function loadpub(){
+
+
     $.ajax({
         url: 'https://corsproxy.io/?https://api.adsabs.harvard.edu/v1/search/query?'+query,
         beforeSend: function(xhr) {
@@ -12,7 +14,10 @@ function loadpub(){
         dataType: "text",       
         headers: {'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS', 'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'},
         success: function(data){
-           
+            var loader = document.getElementsByClassName('loader')[0];
+            loader.style.display = "block";
+        
+        
             var json = JSON.parse(data)['response']['docs'];
             var info_type = ["title", "year", "author"];
 
@@ -62,8 +67,12 @@ function loadpub(){
 
             }
 
+            loader.style.display = "None";
+
         },
     })
+
+
 };
 
 function FirstAuthor(){
