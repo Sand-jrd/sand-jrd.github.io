@@ -180,10 +180,10 @@ const button = document.getElementById('currentpage');
 
 });
 
-function gotosec(id){
+function gotosec(link){
     const button = document.getElementById('currentpage');
 
-    surl="publi.html"
+    surl="pages/"+link+".html"
 
     $.ajax({
         url: surl, 
@@ -192,6 +192,14 @@ function gotosec(id){
             button.innerHTML = response;
         }
     });
+
+    var oldpage = document.getElementById("topnav").getElementsByClassName("active")[0]
+    oldpage.className = "";
+
+    var newpage = document.getElementById(link)
+    newpage.className = "active";
+
+
 }
 // -------- Srcoll of images --------
 
