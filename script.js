@@ -6,7 +6,6 @@ function href(adress){window.location=adress;}
 function loadpub(){
 
     var loader = document.getElementsByClassName('loader')[0];
-    loader.style.display = "block";
 
     $.ajax({
         url: 'https://corsproxy.io/?https://api.adsabs.harvard.edu/v1/search/query?'+query,
