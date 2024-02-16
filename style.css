@@ -119,11 +119,27 @@ ul.uplistlink {
   grid-area: titledate / year;
 }
 
+.abs {
+    display: none;
+    position: absolute;
+  }
+  
+#ADS li:hover {
+    background-color: rgba(245, 170, 170, 0.285);
+    }
+
+#ADS li:hover + .abs{
+    display: flex;
+    z-index: 9999;
+    background-color: rgba(245, 170, 170, 0.285);
+}
+
 .buttomHidden{
     border:  1px solid black;
-    color: #a5a597;
-    box-shadow: inset 0px 0px 3px black;
+    color: white;
+    box-shadow: inset 0px 0px 10px black;
         border-radius: 25px;
+    background-color: #a60718;
 
 }
 .buttomVisible{

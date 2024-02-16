@@ -1,6 +1,6 @@
 // -------- List of publication --------
 
-query = "q=author%3AJuillard%2C+Sandrine&fl=title%2C+author%2C+bibcode%2C+year%2C+doctype&rows=40";
+query = "q=author%3AJuillard%2C+Sandrine&fl=title%2C+author%2C+bibcode%2C+year%2C+abstract%2C+doctype&rows=40";
 function href(adress){window.location=adress;}
 
 function loadpub(){
@@ -22,7 +22,7 @@ function loadpub(){
 
         
             var json = JSON.parse(data)['response']['docs'];
-            var info_type = ["title", "year", "author"];
+            var info_type = ["title", "year", "author", "abstract"];
             document.getElementById("ADS").innerHTML = "";
 
             for (var i=0;i<json.length-1;++i)
@@ -60,7 +60,11 @@ function loadpub(){
                 
                     // Create div
                     var ele = document.createElement("div");
-                    ele.classList.add(info);
+
+                    // Need to change because abstract can also be a type of publication
+                    if (info == "abstract"){ ele.classList.add("abs"); }
+                    else{ ele.classList.add(info); }
+
                     ele.appendChild(document.createTextNode(content));
                     publication_i.appendChild(ele);
                 }
@@ -197,13 +201,8 @@ $(document).ready(function() {
 
 const button = document.getElementById('currentpage');
 
-    $.ajax({
-        url: "pages/into.html", 
-        context: document.body,
-        success: function(response) {
-            button.innerHTML = response;
-        }
-    });
+    var link = localStorage['last_page'] || 'into';
+    gotosec(link)
 
 });
 
@@ -217,6 +216,12 @@ function gotosec(link){
         context: document.body,
         success: function(response) {
             button.innerHTML = response;
+            var navbar = document.getElementById("topnav")
+            var headband = document.getElementById("head-band")
+            var barcolor = document.getElementsByClassName("rounded")[0]
+            headband.style["background-color"] = barcolor.style["background-color"]
+            navbar.style["background-color"] = barcolor.style["background-color"]
+
         }
     });
 
@@ -230,6 +235,9 @@ function gotosec(link){
         loadpub();
         autoScroll();
     }
+
+    localStorage['last_page'] = link
+
 
 
 }
