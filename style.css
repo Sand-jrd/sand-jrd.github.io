@@ -74,6 +74,12 @@ body{
     margin-bottom: 50px;
 }
 
+.suplistlink {
+padding-left: 10px;
+margin-right: 10px;
+
+}
+
 li.suplistlink {
     font-size: 20px;
     border-left: 3px solid #4e9048;
@@ -128,9 +134,10 @@ ul.uplistlink {
     background-color: rgba(245, 170, 170, 0.285);
     }
 
-#ADS li:hover + .abs{
+#ADS li:hover + .absshow{
     display: flex;
     z-index: 9999;
+    position: absolute;
     background-color: rgba(245, 170, 170, 0.285);
 }
 
@@ -263,7 +270,10 @@ ul.uplistlink {
 }
 
 
-#currentpage{ margin-left: 5%; }
+#currentpage{
+    margin-left: 5%;
+    margin-right: 5%;
+}
 
 ul.uplistlink li{
     line-height: 0.1;
