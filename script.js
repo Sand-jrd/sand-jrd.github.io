@@ -6,9 +6,12 @@ function href(adress){window.location=adress;}
 function loadpub(){
 
     var loader = document.getElementsByClassName('loader')[0];
+    if (loader != null) {
+        loader.style.display = "block";
+    }
 
     $.ajax({
-        url: 'https://corsproxy.io/?https://api.adsabs.harvard.edu/v1/search/query?'+query,
+        url: 'https://corsproxy.io/?https://api.adsabs.harvard.edu/v1/search/queryy?'+query,
         beforeSend: function(xhr) {
              xhr.setRequestHeader("Authorization","Bearer MPO6caNhGOjkCeT7ebkh8GyksYnbOeDfzb0hpiZk");
         }, 
@@ -69,6 +72,10 @@ function loadpub(){
 
             loader.style.display = "None";
 
+        },
+        error:function (xhr, ajaxOptions, thrownError){
+            var adsbox = document.getElementById("ADS")
+            adsbox.innerHTML = "<p>Oops, someting went wrong..   <button type='button' onClick='loadpub()'>Retry ?</button></p> <p>Error "+xhr.status+" ="+xhr.responseText+"</p>"
         },
     })
 
