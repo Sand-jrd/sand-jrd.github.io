@@ -9,7 +9,7 @@
 
 body{
     margin-top: 0;
-    margin-left: 6%;
+    margin-left: 0;
     margin-right: 0;
     overflow-x: hidden;
 
@@ -93,7 +93,7 @@ ul.uplistlink {
     width: 100%;
     grid-template-columns: [title] 90% [year] 10px;
     grid-template-rows: [titledate] fit-content(35px) [authors] 31px;
-    margin-bottom: 30px;
+    margin-bottom: 5rem;
     cursor:pointer;
 }
 
@@ -102,10 +102,12 @@ ul.uplistlink {
     width: 100%;
     grid-template-columns: [title] 90% [year] 10px;
     grid-template-rows: [titledate] fit-content(35px) [authors] 31px;
-    margin-bottom: 30px;
     cursor:pointer;
 }
 
+.textimg{
+    display: block;
+}
 
 .title{
   color: #a60718;
@@ -244,6 +246,14 @@ ul.uplistlink {
 	}
 }
 
+
+#currentpage{ margin-left: 5%; }
+
+ul.uplistlink li{
+    line-height: 0.1;
+    margin-bottom: 17px;
+}
+
 #head-band {
     display: inline-flex;
     justify-content: space-between;
@@ -252,12 +262,10 @@ ul.uplistlink {
 	color: white;
 	font-family:lexend;
     font-weight: bolder;
-    padding-left: 5px;
-    margin-left: -7%; /*To compansate margin from body*/
     overflow: hidden;
     margin-top: 0px;
 	background-color: #005fb2;
-    width: 107%;
+    width: 100%;
     overflow-y: hidden;
     position: relative;
 }
@@ -299,7 +307,7 @@ h2 {
 }
 
 #prez {
-    display: grid;
+    display: block;
     grid-template-columns: 50% 30%;
     grid-gap: 5%;
     

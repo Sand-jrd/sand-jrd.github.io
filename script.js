@@ -11,7 +11,7 @@ function loadpub(){
     }
 
     $.ajax({
-        url: 'https://corsproxy.io/?https://api.adsabs.harvard.edu/v1/search/queryy?'+query,
+        url: 'https://corsproxy.io/?https://api.adsabs.harvard.edu/v1/search/query?'+query,
         beforeSend: function(xhr) {
              xhr.setRequestHeader("Authorization","Bearer MPO6caNhGOjkCeT7ebkh8GyksYnbOeDfzb0hpiZk");
         }, 
@@ -23,6 +23,7 @@ function loadpub(){
         
             var json = JSON.parse(data)['response']['docs'];
             var info_type = ["title", "year", "author"];
+            document.getElementById("ADS").innerHTML = "";
 
             for (var i=0;i<json.length-1;++i)
             {
@@ -74,8 +75,10 @@ function loadpub(){
 
         },
         error:function (xhr, ajaxOptions, thrownError){
+            var loader = document.getElementsByClassName('loader')[0];
             var adsbox = document.getElementById("ADS")
-            adsbox.innerHTML = "<p>Oops, someting went wrong..   <button type='button' onClick='loadpub()'>Retry ?</button></p> <p>Error "+xhr.status+" ="+xhr.responseText+"</p>"
+            adsbox.innerHTML = "<p>Oops, someting went wrong..   <button type='button' onclick='loadpub()'>Retry ?</button></p> <p>Error "+xhr.status+" ="+xhr.responseText+"</p>"
+            loader.style.display = "None";
         },
     })
 
@@ -224,7 +227,8 @@ function gotosec(link){
     newpage.className = "active";
 
     if (link == "publi"){
-        loadpub()
+        loadpub();
+        autoScroll();
     }
 
 
@@ -235,13 +239,24 @@ var scrollHandler = null;
   
 function autoScroll () {
     clearInterval(scrollHandler);
-    var endscroll = document.getElementById("public").scrollWidth/2;
+
+    var endscroll = document.getElementById("public")
     scrollHandler = setInterval(function() {
-      document.getElementById("public").scrollLeft += 1;
+        if (document.getElementById("public") == null){
+        // Nothing to do, page isn't showing.
+        }
+        else{
+            var endscroll = document.getElementById("public").scrollWidth/3;
+            document.getElementById("public").scrollLeft += 1;
+            if (document.getElementById("public").scrollLeft > endscroll+500){
+                document.getElementById("public").scrollLeft -= endscroll;
+            }
+            if (document.getElementById("public").scrollLeft < endscroll-500){
+                document.getElementById("public").scrollLeft += endscroll;
+            }
+        }
+
     },1);
-    if (document.getElementById("public").scrollLeft > endscroll+500){
-        document.getElementById("public").scrollLeft -= endscroll;
-    }
 }
 
  function handleOnScroll () {
