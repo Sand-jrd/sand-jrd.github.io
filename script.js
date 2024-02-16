@@ -264,12 +264,12 @@ function autoScroll () {
             }
         }
 
-    },1);
+    },0.01);
 }
 
  function handleOnScroll () {
   clearInterval(scrollHandler);
-  setTimeout(autoScroll, 200);
+  setTimeout(autoScroll, 5);
  };
  
 $(document).ready(function() {
