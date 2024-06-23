@@ -11,7 +11,7 @@ function loadpub(){
     }
 
     $.ajax({
-        url: 'https://corsproxy.io/?https://api.adsabs.harvard.edu/v1/search/query?'+query,
+        url: 'https://cors-anywhere.herokuapp.com/'+'https://api.adsabs.harvard.edu/v1/search/query?'+query,
         beforeSend: function(xhr) {
              xhr.setRequestHeader("Authorization","Bearer MPO6caNhGOjkCeT7ebkh8GyksYnbOeDfzb0hpiZk");
         }, 
