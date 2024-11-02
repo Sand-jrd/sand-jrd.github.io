@@ -273,12 +273,12 @@ function autoScroll () {
             }
         }
 
-    },0.01);
+    },0.001);
 };
 
  function handleOnScroll () {
   clearInterval(scrollHandler);
-  setTimeout(autoScroll, 5);
+  setTimeout(autoScroll, 10);
  };
  
 $(document).ready(function() {

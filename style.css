@@ -50,7 +50,7 @@ body{
     display: none;  /* Safari and Chrome */
 }
 .inside-container{
-    height: 400px;
+    height: 700px;
     width: 90%;
     background-color: #fafafa;
     box-shadow: inset 0px 0px 10px rgba(0,0,0,0.9);
@@ -68,7 +68,7 @@ body{
 
 .inside{
     overflow: scroll;
-    height: 400px;  
+    height: 700px;  
     background-color: #fafafa;
     box-shadow: inset 0px 0px 10px rgba(0,0,0,0.9);
     margin-bottom: 50px;
@@ -288,7 +288,7 @@ ul.uplistlink {
 
 }
 .inlinelink{
-    color: rgb(101, 98, 158);
+    color: rgb(23, 0, 226);
     text-decoration: none;
 
 }
