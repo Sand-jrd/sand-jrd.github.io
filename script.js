@@ -5,13 +5,14 @@ function href(adress){window.location=adress;}
 
 function loadpub(){
     ajaxProxy.init();
-    
-    var loader = document.getElementsByClassName('loader')[0];
+
+    var loader = document.getElementById('loader_icon')
     if (loader != null) {
         loader.style.display = "block";
     }
+
     var apiUrl = 'https://api.adsabs.harvard.edu/v1/search/query?'+query;
-    $.ajax({
+    ajj = $.ajax({
         url: apiUrl,
         beforeSend: function(xhr) {
              xhr.setRequestHeader("Authorization","Bearer MPO6caNhGOjkCeT7ebkh8GyksYnbOeDfzb0hpiZk");
@@ -21,6 +22,7 @@ function loadpub(){
         jsonpCallback: false,  
         headers: {'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS', 'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'},
         success: function(data){
+
             var loader = document.getElementsByClassName('loader')[0];
 
             var json = JSON.parse(data)['response']['docs'];
@@ -30,7 +32,7 @@ function loadpub(){
             for (var i=0;i<json.length-1;++i)
             {
                 var publication_i = document.createElement("li");
-
+                
                 for (var k=0;k<info_type.length;++k){
                 
                     // Content from JSON
@@ -76,19 +78,18 @@ function loadpub(){
                 document.getElementById("ADS").appendChild(publication_i);
 
             }
-
-            loader.style.display = "None";
-
         },
         error:function (xhr, ajaxOptions, thrownError){
             var loader = document.getElementsByClassName('loader')[0];
             var adsbox = document.getElementById("ADS")
             adsbox.innerHTML = "<p>Oops, someting went wrong..   <button type='button' onclick='loadpub()'>Retry ?</button></p> <p>Error "+xhr.status+" ="+xhr.responseText+"</p>"
             loader.style.display = "None";
-        },
-    })
-
-
+        },        
+        complete:function (){
+            var loader = document.getElementById('loader_icon')
+            loader.style.display = "None";            
+        }
+    });
 };
 
 function FirstAuthor(){
@@ -208,35 +209,41 @@ const button = document.getElementById('currentpage');
 
 });
 
-function gotosec(link){
-    const button = document.getElementById('currentpage');
+ async function gotosec(link){
 
     surl="pages/"+link+".html"
+    const button = document.getElementById('currentpage');
 
-    $.ajax({
-        url: surl, 
-        context: document.body,
-        success: function(response) {
-            button.innerHTML = response;
-            var navbar = document.getElementById("topnav")
-            var headband = document.getElementById("head-band")
-            var barcolor = document.getElementsByClassName("rounded")[0]
-            headband.style["background-color"] = barcolor.style["background-color"]
-            navbar.style["background-color"] = barcolor.style["background-color"]
+    await fetch(surl)
+    .then(response=> response.text())
+    .then(text=> button.innerHTML = text);
 
-        }
-    });
-
+    try{
     var oldpage = document.getElementById("topnav").getElementsByClassName("active")[0]
-    oldpage.className = "";
+    oldpage.className = "unactive";
+    }
+    catch(error){
+        console.error("No page:", error);
+    }
+
 
     var newpage = document.getElementById(link)
     newpage.className = "active";
+
+    var navbar = document.getElementById("topnav");
+    var headband = document.getElementById("head-band");
+    var barcolor = document.getElementsByClassName("rounded")[0];
+    headband.style["background-color"] = barcolor.style["background-color"];
+    navbar.style["background-color"] = barcolor.style["background-color"];
 
     if (link == "publi"){
         loadpub();
         autoScroll();
     }
+    if (link == "into"){
+        add_markdown ()
+    }
+
 
     localStorage['last_page'] = link
 
@@ -267,7 +274,7 @@ function autoScroll () {
         }
 
     },0.01);
-}
+};
 
  function handleOnScroll () {
   clearInterval(scrollHandler);
@@ -278,7 +285,10 @@ $(document).ready(function() {
     autoScroll();
 });
  
- 
- 
- 
+function add_markdown () {
+    const converter = new showdown.Converter(); 
+    fetch("greeds.md")
+    .then(response=> response.text())
+    .then(text=> document.getElementById("markdown-output").innerHTML = converter.makeHtml(text));
+};
  
