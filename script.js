@@ -292,3 +292,14 @@ function add_markdown () {
     .then(text=> document.getElementById("markdown-output").innerHTML = converter.makeHtml(text));
 };
  
+function copypipinstall ()  {
+    navigator.clipboard.writeText("pip install GreeDS");
+};
+
+function copyimport ()  {
+    navigator.clipboard.writeText("from  GreeDS import  GreeDS\nfrom  vip_hci.fits import  open_fits\ncube = open_fits( 'your_cube.fits')\nangles = open_fits( 'your_PA_angles.fits')\nref = open_fits( 'your_refs.fits')");
+};
+
+function copygreeds ()  {
+    navigator.clipboard.writeText("r = 10 # Iteration over PCA-rank\nl = 10 # Iteration per rank\nr_start = 1 # PCA-rank to start iteration (good for faint signals)\npup_size = 3 # Radius of numerical mask to hide coro\nres = GreeDS(cube, angles, r=r, l=l, r_start=r_start, pup_size=pup_size)");
+};
