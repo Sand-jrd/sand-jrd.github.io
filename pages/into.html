@@ -20,7 +20,7 @@
 <div class="textimg">
     <div><p>
         My name is <a class="inlinelink" href="https://www.uliege.be/cms/c_9054334/fr/repertoire?uid=u238055">Sandrine Juillard</a>, and I am currently pursuing my PhD at the University of Liège - in <a class="inlinelink" href="https://www.psilab.uliege.be/cms/c_9965343/en/psilab">The Planetary & Stellar system Imaging Laboratory (PSILab)</a> - under the supervision of <a class="inlinelink" href="https://sites.google.com/view/valentinchristiaens/home">Valentin Christiaens</a> and <a class="inlinelink" href="https://www.psilab.uliege.be/cms/c_9967806/en/psilab-olivier-absil">Olivier Absil</a>. 
-    </br></br>I am conducting research in the field of signal processing as applied to high-contrast imaging. I recommend using I-PCA (also known as GreeDS). You can install my implementation of <code>GreeDS</code>, which is fast, simple, and requires <code>PyTorch</code>. See the instructions below or in the "code" section.
+    </br></br>I am conducting research in the field of signal processing applied to high-contrast imaging. <spam class="text-highlight_blue">I recommend using Iterative Principal Component Analysis (I-PCA), also known as GreeDS, for processing ADI/RDI infrared scattered-light HCI datasets (e.g VLT/SHPERE/IRDIS, KECK/NIRC).</spam> You can install my implementation of <code>GreeDS</code>, which is fast, simple, and requires <code>PyTorch</code>. See the instructions below or in the "code" section.
 </br></br>Currently, in my final year, I started a new project in collaboration with Yannis Argyriou and Danny Gasman (KU Leuven, Belgium), focused on PSF-subtraction for the JWST/MIRI-MRS instrument. 
 </br></br>As I approach thecompletion of my Ph.D. in September 2025, I am actively seeking to pursue a career in space science
     </p></div>
@@ -42,13 +42,13 @@
 <p>Download IPCA via <a class="inlinelink" href="https://pypi.org/project/GreeDS/">PyPI</a>:</p>
 
 <div class="inlinecode">
-pip install GreeDS <button onclick="copypipinstall()"><img src="../cp.png" style="width: 15px;"></button>
+pip install GreeDS <button onclick="copypipinstall()"><img src="../cp.png" title="Copy Text to Clipboard" style="width: 15px;"></button>
 </div>
 
 <p>Exemple usage</p>
 
 <pre>
-    <div class="codetitle">Import package and load data</code><button class="inblock" onclick="copyimport()"><img src="../cp.png" style="width: 30px;"></button></div>
+    <div class="codetitle">Import package and load data</code><button title="Copy Text to Clipboard"  class="inblock" onclick="copyimport()"><img src="../cp.png" style="width: 30px;"></button></div>
 <code> <span class="keyword">from</span>  <span class="function">GreeDS</span> <span class="keyword">import</span>  <span class="function">GreeDS</span>
   <span class="keyword">from</span>  <span class="function">vip_hci.fits</span> <span class="keyword">import</span>  <span class="function">open_fits</span>
 
@@ -56,7 +56,7 @@ pip install GreeDS <button onclick="copypipinstall()"><img src="../cp.png" style
   <span class="variable">angles</span> = <span class="function">open_fits</span>( <span class="string">"your_PA_angles.fits"</span>)</span>
   <span class="variable">ref</span> = <span class="function">open_fits</span>( <span class="string">"your_refs.fits"</span>)</span></code></pre>
 
- <pre>    <div class="codetitle">Use IPCA<button class="inblock" onclick="copygreeds()"><img src="../cp.png" style="width: 30px;"></button></div>
+ <pre>    <div class="codetitle">Use IPCA<button class="inblock" title="Copy Text to Clipboard" onclick="copygreeds()"><img src="../cp.png" style="width: 30px;"></button></div>
 <code> <span class="variable">r</span> = <span class="number">10</span> <span class="comment"># Iteration over PCA-rank</span>
   <span class="variable">l</span> = <span class="number">10</span> <span class="comment"># Iteration per rank</span>
   <span class="variable">r_start</span> = <span class="number">1</span> <span class="comment"># PCA-rank to start iteration (good for faint signals)</span>
