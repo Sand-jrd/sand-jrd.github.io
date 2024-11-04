@@ -409,11 +409,6 @@ function USAMap(){
     document.getElementById("map_container").scrollLeft = 0.2*svgWidth - contWidth/2;
     document.getElementById("map_container").scrollTop = 0.4*svgHeight - contHeight/2;
 
-    var elem = document.getElementsByClassName('map_elem')
-    for (let i = 0; i < elem.length; i++) {
-        elem[i].style.fill = "orange"
-    } 
-
     localStorage['map_focus'] = "USA"
 
 };
@@ -432,10 +427,6 @@ function EuropeMap(){
     document.getElementById("map_container").scrollLeft = 0.47*svgWidth - contWidth/2;
     document.getElementById("map_container").scrollTop = 0.345*svgHeight - contHeight/2;
 
-    var elem = document.getElementsByClassName('map_elem')
-    for (let i = 0; i < elem.length; i++) {
-        elem[i].style.fill = "orange"
-    } 
     localStorage['map_focus'] = "Europe"
 
 };
@@ -497,7 +488,11 @@ function ResetLegend(){
     fetch("map_places/default.html")
     .then(response=> response.text())
     .then(text=>  document.getElementById('legend-text').innerHTML = text);
-
+    
+    var elem = document.getElementsByClassName('map_elem')
+    for (let i = 0; i < elem.length; i++) {
+        elem[i].style.fill = "orange"
+    } 
 };
 
 
