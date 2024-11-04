@@ -194,6 +194,9 @@ $(document).ready(function() {
         document.getElementsByClassName("rounded")[i].style.width = (max+50)+'px';
     };
 
+    // Init map list
+    localStorage['last_com'] = 0
+
     
 });
 
@@ -206,6 +209,21 @@ const button = document.getElementById('currentpage');
 
     var link = localStorage['last_page'] || 'into';
     gotosec(link)
+
+    if (link == "com"){
+        setMap()
+        homeMap()
+        setHeight() 
+    }
+
+    if (link == "publi"){
+        loadpub();
+        autoScroll();
+    }
+
+    if (link == "into"){
+        add_markdown ()
+    }
 
 });
 
@@ -244,6 +262,11 @@ const button = document.getElementById('currentpage');
         add_markdown ()
     }
 
+    if (link == "com"){
+        setMap()
+        homeMap()
+        setHeight() 
+    }
 
     localStorage['last_page'] = link
 
@@ -303,3 +326,104 @@ function copyimport ()  {
 function copygreeds ()  {
     navigator.clipboard.writeText("r = 10 # Iteration over PCA-rank\nl = 10 # Iteration per rank\nr_start = 1 # PCA-rank to start iteration (good for faint signals)\npup_size = 3 # Radius of numerical mask to hide coro\nres = GreeDS(cube, angles, r=r, l=l, r_start=r_start, pup_size=pup_size)");
 };
+
+function zoomMap(){
+    scale=1.6
+    svg = document.getElementById("svgMap");
+    let svgWidth = parseInt(svg.getAttribute('width'));
+    svg.setAttribute('width', `${(svgWidth * scale)}`);
+    let svgHeight = parseInt(svg.getAttribute('height'));
+    svg.setAttribute('height', `${(svgHeight * scale)}`);
+    homeMap()
+};
+
+function unzoomMap(){
+
+    scale=0.6
+    svg = document.getElementById("svgMap");
+    let svgWidth = parseInt(svg.getAttribute('width'));
+    svg.setAttribute('width', `${(svgWidth * scale)}`);
+    let svgHeight = parseInt(svg.getAttribute('height'));
+    svg.setAttribute('height', `${(svgHeight * scale)}`);
+    homeMap()
+
+};
+function homeMap(){
+
+    var elementTop = document.getElementById('liege').offsetTop;
+    var divTop = document.getElementById('map_container').offsetTop;
+    var elementRelativeTop = elementTop + divTop - document.getElementById("map_container").scrollTop ;
+
+    document.getElementById("map_container").scrollLeft = 1999;
+    document.getElementById("map_container").scrollTop = elementRelativeTop;
+
+
+};
+
+
+async function setMap(){
+
+    var elem = document.getElementsByClassName('map_elem')
+    for (let i = 0; i < elem.length; i++) {
+        elem[i].addEventListener("mouseover", function(){
+            document.getElementById('legend-text').innerHTML = elem[i].id;
+            fetch("map_places/"+elem[i].id+".html")
+            .then(response=> response.text())
+            .then(text=>  document.getElementById('legend-text').innerHTML = text);
+        
+        });
+    
+    } 
+
+}  
+
+function NextMap(){
+    document.getElementById("home_elem").style="fill='#fff';"
+    const list_com_pos = [[520,300], [520,300], [520,300]];
+
+    id = localStorage['last_com']
+
+    localStorage['last_com'] +=1
+
+    if (localStorage['last_com']>list_com_pos.length){
+        localStorage['last_com']=0
+    }
+
+    var pos = list_com_pos[id]
+
+    document.getElementById("map_container").scrollLeft += 4100;
+    document.getElementById("map_container").scrollTop = 530;
+
+
+};
+
+
+
+function setHeight() {
+
+    const container = document.getElementById('twoeleme');
+    const b2 =  document.getElementById('legend');
+
+    if (document.getElementById('twoeleme').getBoundingClientRect().width < 600){
+        document.getElementById('map_container').style.width = "100%";
+        document.getElementById('legend').style.width = "100%";
+        document.getElementById('map_container').style.height = "50vh";
+        document.getElementById('legend').style.height = "20vh";
+
+    }
+    else{
+        document.getElementById('map_container').style.width = "75%";
+        document.getElementById('legend').style.width = "25%";
+        document.getElementById('map_container').style.height = "70vh";
+        document.getElementById('legend').style.height = "70vh";
+
+        }
+
+}
+
+window.addEventListener('resize', setHeight);
+
+
+
+
+  
