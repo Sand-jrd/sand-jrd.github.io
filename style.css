@@ -126,7 +126,9 @@ ul.uplistlink {
 
 
 }
-
+#legend-reset{
+    display: flex;
+}
 .title{
   color: #a60718;
   grid-area: titledate / title;

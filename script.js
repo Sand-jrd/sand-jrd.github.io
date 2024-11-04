@@ -357,10 +357,25 @@ function homeMap(){
 
     document.getElementById("map_container").scrollLeft = 1999;
     document.getElementById("map_container").scrollTop = 1200;
+    ResetLegend()
 
+    var elem = document.getElementsByClassName('map_elem')
+    for (let i = 0; i < elem.length; i++) {
+        elem[i].style.fill = "orange"
+    } 
+    elem_hovered.style.fill = "red"
 
 };
 
+function elemHighlight(elem_hovered){
+    var elem = document.getElementsByClassName('map_elem')
+    for (let i = 0; i < elem.length; i++) {
+        elem[i].style.fill = "gray"
+    } 
+    elem_hovered.style.fill = "red"
+    elem_hovered.style.filter= "dropshadow(-1px -1px 10px #3e68ff)"
+
+}  
 
 async function setMap(){
 
@@ -370,34 +385,41 @@ async function setMap(){
             document.getElementById('legend-text').innerHTML = elem[i].id;
             fetch("map_places/"+elem[i].id+".html")
             .then(response=> response.text())
-            .then(text=>  document.getElementById('legend-text').innerHTML = text);
-        
+            .then(text=>  document.getElementById('legend-text').innerHTML = text)
+            .then(elemHighlight(elem[i]))
+            
         });
     
     } 
 
+
 }  
 
 function NextMap(){
-    document.getElementById("home_elem").style="fill='#fff';"
-    const list_com_pos = [[520,300], [520,300], [520,300]];
-
+    var elem = document.getElementsByClassName('map_elem')
     id = localStorage['last_com']
 
-    localStorage['last_com'] +=1
+    localStorage['last_com'] =  Number(id)+1
 
-    if (localStorage['last_com']>list_com_pos.length){
+    if (localStorage['last_com']>elem.length){
         localStorage['last_com']=0
     }
 
-    var pos = list_com_pos[id]
-
-    document.getElementById("map_container").scrollLeft += 4100;
-    document.getElementById("map_container").scrollTop = 530;
+    fetch("map_places/"+elem[id].id+".html")
+    .then(response=> response.text())
+    .then(text=>  document.getElementById('legend-text').innerHTML = text)
+    .then(elemHighlight(elem[id]))
 
 
 };
 
+function ResetLegend(){
+
+    fetch("map_places/default.html")
+    .then(response=> response.text())
+    .then(text=>  document.getElementById('legend-text').innerHTML = text);
+
+};
 
 
 function setHeight() {
