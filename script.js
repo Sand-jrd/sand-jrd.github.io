@@ -353,9 +353,10 @@ function homeMap(){
     var elementTop = document.getElementById('liege').offsetTop;
     var divTop = document.getElementById('map_container').offsetTop;
     var elementRelativeTop = elementTop + divTop - document.getElementById("map_container").scrollTop ;
+    var elementRelativeTop = elementTop + divTop - document.getElementById("map_container").scrollTop ;
 
     document.getElementById("map_container").scrollLeft = 1999;
-    document.getElementById("map_container").scrollTop = elementRelativeTop;
+    document.getElementById("map_container").scrollTop = 1200;
 
 
 };
