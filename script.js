@@ -255,17 +255,17 @@ const button = document.getElementById('currentpage');
     navbar.style["background-color"] = barcolor.style["background-color"];
 
     if (link == "publi"){
-        loadpub();
+        await loadpub();
         autoScroll();
     }
     if (link == "into"){
-        add_markdown ()
+        await add_markdown ()
     }
 
     if (link == "com"){
-        setMap()
-        homeMap()
-        setHeight() 
+        await setMap()
+        await homeMap()
+        await setHeight() 
     }
 
     localStorage['last_page'] = link
@@ -363,7 +363,6 @@ function homeMap(){
     for (let i = 0; i < elem.length; i++) {
         elem[i].style.fill = "orange"
     } 
-    elem_hovered.style.fill = "red"
 
 };
 
@@ -424,10 +423,7 @@ function ResetLegend(){
 
 function setHeight() {
 
-    const container = document.getElementById('twoeleme');
-    const b2 =  document.getElementById('legend');
-
-    if (document.getElementById('twoeleme').getBoundingClientRect().width < 600){
+    if (document.getElementById('head-band').getBoundingClientRect().width < 600){
         document.getElementById('map_container').style.width = "100%";
         document.getElementById('legend').style.width = "100%";
         document.getElementById('map_container').style.height = "50vh";
