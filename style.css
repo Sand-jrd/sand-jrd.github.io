@@ -563,7 +563,10 @@ width: fit-content;
 .map_elem:hover{
     fill:#005fb2;
     box-shadow: 5px 5px 5px rgba(177, 190, 0, 0.9);
-    border: 1px solid #ee5f00;
+    fill:#33cc33;
+	stroke-width:7;
+	stroke-opacity: 0.5;
+	stroke: #33cc33;
 }
 
 #twoeleme{
@@ -576,4 +579,25 @@ width: fit-content;
 #legend{
     box-shadow: 0px 0px 5px rgba(0,0,0,0.9);
     width: 100%;
+    height: fit-content;
+}
+
+#legend-text{
+    padding: 10px;
+}
+
+#legend-text ul{
+    margin-left: 1px;
+    list-style-type: none;
+    padding-left: 1px;}
+#legend-text li{
+    margin-left: 10px;
+    padding-left: 1px;}
+    
+#legend-text h3{
+color: white;
+background-color: #b65dfa;
+font-weight: bold;
+font-size: 14;
+text-align: center;
 }

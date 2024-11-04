@@ -212,7 +212,7 @@ const button = document.getElementById('currentpage');
 
     if (link == "com"){
         setMap()
-        homeMap()
+        EuropeMap()
         setHeight() 
     }
 
@@ -264,7 +264,7 @@ const button = document.getElementById('currentpage');
 
     if (link == "com"){
         await setMap()
-        await homeMap()
+        await EuropeMap()
         await setHeight() 
     }
 
@@ -328,41 +328,115 @@ function copygreeds ()  {
 };
 
 function zoomMap(){
+
     scale=1.6
     svg = document.getElementById("svgMap");
+    container = document.getElementById("map_container").getBoundingClientRect()
+
     let svgWidth = parseInt(svg.getAttribute('width'));
-    svg.setAttribute('width', `${(svgWidth * scale)}`);
     let svgHeight = parseInt(svg.getAttribute('height'));
+    let contWidth = parseInt(container.width);
+    let contHeight = parseInt(container.height);
+
+    focus_left = (document.getElementById("map_container").scrollLeft + contWidth/2) /svgWidth;
+    focus_top = (document.getElementById("map_container").scrollTop + contHeight/2) /svgHeight; 
+
+    svg.setAttribute('width', `${(svgWidth * scale)}`);
     svg.setAttribute('height', `${(svgHeight * scale)}`);
-    homeMap()
+
+    document.getElementById("map_container").scrollLeft = focus_left*svgWidth * scale - contWidth/2;
+    document.getElementById("map_container").scrollTop = focus_top*svgHeight * scale - contHeight/2;
+
 };
+
+
 
 function unzoomMap(){
 
     scale=0.6
+
     svg = document.getElementById("svgMap");
+    container = document.getElementById("map_container").getBoundingClientRect()
+
     let svgWidth = parseInt(svg.getAttribute('width'));
-    svg.setAttribute('width', `${(svgWidth * scale)}`);
     let svgHeight = parseInt(svg.getAttribute('height'));
+    let contWidth = parseInt(container.width);
+    let contHeight = parseInt(container.height);
+
+    focus_left = (document.getElementById("map_container").scrollLeft + contWidth/2) /svgWidth;
+    focus_top = (document.getElementById("map_container").scrollTop + contHeight/2) /svgHeight; 
+
+    svg.setAttribute('width', `${(svgWidth * scale)}`);
     svg.setAttribute('height', `${(svgHeight * scale)}`);
-    homeMap()
+
+    document.getElementById("map_container").scrollLeft = focus_left*svgWidth * scale - contWidth/2;
+    document.getElementById("map_container").scrollTop = focus_top*svgHeight * scale - contHeight/2;
 
 };
-function homeMap(){
 
-    var elementTop = document.getElementById('liege').offsetTop;
-    var divTop = document.getElementById('map_container').offsetTop;
-    var elementRelativeTop = elementTop + divTop - document.getElementById("map_container").scrollTop ;
-    var elementRelativeTop = elementTop + divTop - document.getElementById("map_container").scrollTop ;
+function HomeMap(){
+    svg = document.getElementById("svgMap");
+    container = document.getElementById("map_container").getBoundingClientRect()
+    svg.setAttribute('height', `${(4057*1.5)}`);
+    svg.setAttribute('width', `${(5000*1.5)}`);
 
-    document.getElementById("map_container").scrollLeft = 1999;
-    document.getElementById("map_container").scrollTop = 1200;
     ResetLegend()
+
+    EuropeMap()
+};
+
+function USAzoom(){
+    svg = document.getElementById("svgMap");
+
+    svg.setAttribute('height', `${(4057*1)}`);
+    svg.setAttribute('width', `${(5000*1)}`);
+    ResetLegend()
+
+    USAMap()
+
+};
+
+function USAMap(){
+    svg = document.getElementById("svgMap");
+    container = document.getElementById("map_container").getBoundingClientRect()
+
+    let svgWidth = parseInt(svg.getAttribute('width'));
+    let svgHeight = parseInt(svg.getAttribute('height'));
+    let contWidth = parseInt(container.width);
+    let contHeight = parseInt(container.height);
+
+    
+    document.getElementById("map_container").scrollLeft = 0.2*svgWidth - contWidth/2;
+    document.getElementById("map_container").scrollTop = 0.4*svgHeight - contHeight/2;
 
     var elem = document.getElementsByClassName('map_elem')
     for (let i = 0; i < elem.length; i++) {
         elem[i].style.fill = "orange"
     } 
+
+    localStorage['map_focus'] = "USA"
+
+};
+
+function EuropeMap(){
+
+    svg = document.getElementById("svgMap");
+    container = document.getElementById("map_container").getBoundingClientRect()
+
+    let svgWidth = parseInt(svg.getAttribute('width'));
+    let svgHeight = parseInt(svg.getAttribute('height'));
+    let contWidth = parseInt(container.width);
+    let contHeight = parseInt(container.height);
+
+    
+    document.getElementById("map_container").scrollLeft = 0.47*svgWidth - contWidth/2;
+    document.getElementById("map_container").scrollTop = 0.345*svgHeight - contHeight/2;
+
+    var elem = document.getElementsByClassName('map_elem')
+    for (let i = 0; i < elem.length; i++) {
+        elem[i].style.fill = "orange"
+    } 
+    localStorage['map_focus'] = "Europe"
 
 };
 
@@ -404,6 +478,12 @@ function NextMap(){
         localStorage['last_com']=0
     }
 
+    if (elem[id].id == "santabarbra" || elem[id].id == "losangeles"){
+        USAMap();
+    }
+    else{
+        EuropeMap();
+    }
     fetch("map_places/"+elem[id].id+".html")
     .then(response=> response.text())
     .then(text=>  document.getElementById('legend-text').innerHTML = text)
@@ -427,7 +507,7 @@ function setHeight() {
         document.getElementById('map_container').style.width = "100%";
         document.getElementById('legend').style.width = "100%";
         document.getElementById('map_container').style.height = "50vh";
-        document.getElementById('legend').style.height = "20vh";
+        document.getElementById('legend').style.height = "fit-content";
 
     }
     else{
@@ -435,6 +515,8 @@ function setHeight() {
         document.getElementById('legend').style.width = "25%";
         document.getElementById('map_container').style.height = "70vh";
         document.getElementById('legend').style.height = "70vh";
+        document.getElementById('legend').style.overflowY = "scroll";
+
 
         }
 
@@ -442,6 +524,10 @@ function setHeight() {
 
 window.addEventListener('resize', setHeight);
 
+
+window.addEventListener("click", (event) => {
+  ResetLegend();
+});
 
 
 
