@@ -116,10 +116,15 @@ ul.uplistlink {
     flex-wrap: wrap;
     justify-content: space-between;
     flex-direction: row;
+    width: 100%;
 }
 
 .textimg p {
-    max-width: 800px;
+    width: 90%;    
+    max-width: 1000px;
+    min-width: 300px;
+
+
 }
 
 .title{
