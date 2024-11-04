@@ -519,10 +519,13 @@ function setHeight() {
 
 window.addEventListener('resize', setHeight);
 
-
-window.addEventListener("click", (event) => {
-  ResetLegend();
+$(document).ready(function() {
+    document.getElementById('mapsSVG').addEventListener("click", (event) => {
+        ResetLegend();
+      });
 });
+
+
 
 
 
