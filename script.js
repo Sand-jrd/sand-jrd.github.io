@@ -456,7 +456,9 @@ async function setMap(){
     
     } 
 
-
+    document.getElementById('mapsSVG').addEventListener("click", (event) => {
+        ResetLegend();
+      });
 }  
 
 function NextMap(){
@@ -518,14 +520,6 @@ function setHeight() {
 }
 
 window.addEventListener('resize', setHeight);
-
-$(document).ready(function() {
-    document.getElementById('mapsSVG').addEventListener("click", (event) => {
-        ResetLegend();
-      });
-});
-
-
 
 
 
