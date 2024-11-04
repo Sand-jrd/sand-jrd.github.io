@@ -212,7 +212,7 @@ const button = document.getElementById('currentpage');
 
     if (link == "com"){
         setMap()
-        EuropeMap()
+        HomeMap()
         setHeight() 
     }
 
@@ -264,7 +264,7 @@ const button = document.getElementById('currentpage');
 
     if (link == "com"){
         await setMap()
-        await EuropeMap()
+        await HomeMap()
         await setHeight() 
     }
 
@@ -488,7 +488,7 @@ function ResetLegend(){
     fetch("map_places/default.html")
     .then(response=> response.text())
     .then(text=>  document.getElementById('legend-text').innerHTML = text);
-    
+
     var elem = document.getElementsByClassName('map_elem')
     for (let i = 0; i < elem.length; i++) {
         elem[i].style.fill = "orange"
