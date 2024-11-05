@@ -1,6 +1,6 @@
 // -------- List of publication --------
 
-query = "q=author%3AJuillard%2C+Sandrine&fl=title%2C+author%2C+bibcode%2C+year%2C+abstract%2C+doctype&rows=40";
+query = "q=author%3AJuillard%2C+Sandrine&fl=title%2C+author%2C+bibcode%2C+year%2C+abstract%2C+doctype&rows=40&sort=date+desc";
 function href(adress){window.location=adress;}
 
 function loadpub(){
