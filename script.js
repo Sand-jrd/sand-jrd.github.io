@@ -456,9 +456,14 @@ async function setMap(){
     
     } 
 
-    document.getElementById('mapsSVG').addEventListener("click", (event) => {
-        ResetLegend();
+
+      document.getElementById('LK').addEventListener("click", (event) => {
+        var elem = document.getElementsByClassName('visitedland')
+        for (let i = 0; i < elem.length; i++) {
+            elem[i].style.fill = "#b65dfa";
+        }
       });
+
 }  
 
 function NextMap(){
@@ -493,7 +498,7 @@ function ResetLegend(){
 
     var elem = document.getElementsByClassName('map_elem')
     for (let i = 0; i < elem.length; i++) {
-        elem[i].style.fill = "orange"
+        elem[i].style.fill = "#b65dfa"
     } 
 };
 

@@ -561,12 +561,10 @@ width: fit-content;
 
 
 .map_elem:hover{
-    fill:#005fb2;
-    box-shadow: 5px 5px 5px rgba(177, 190, 0, 0.9);
-    fill:#33cc33;
+    box-shadow: 5px 5px 5px rgba(238, 35, 35, 0.9);
 	stroke-width:7;
 	stroke-opacity: 0.5;
-	stroke: #33cc33;
+	stroke: #cc3333;
 }
 
 #twoeleme{
