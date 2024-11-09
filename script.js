@@ -1,3 +1,8 @@
+
+function gotopage(link) {
+    window.location.href = window.location.origin+"?page="+link;
+}
+
 // -------- List of publication --------
 
 query = "q=author%3AJuillard%2C+Sandrine&fl=title%2C+author%2C+bibcode%2C+year%2C+abstract%2C+doctype&rows=40&sort=date+desc";
@@ -207,7 +212,13 @@ $(document).ready(function() {
 
 const button = document.getElementById('currentpage');
 
-    var link = localStorage['last_page'] || 'into';
+    var url = window.location.href;
+    if (url.includes('page=')==false){
+        var link = localStorage['last_page'] || 'into';
+        window.location.href = window.location.origin+"?page="+link;
+    }
+
+    var link = url.substring(5+url.indexOf('page='))
     gotosec(link)
 
     if (link == "com"){
@@ -270,9 +281,8 @@ const button = document.getElementById('currentpage');
 
     localStorage['last_page'] = link
 
-
-
 }
+
 // -------- Srcoll of images --------
 
 var scrollHandler = null;
