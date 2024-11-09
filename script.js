@@ -75,6 +75,13 @@ function loadpub(){
                     else{ ele.classList.add(info); }
 
                     ele.appendChild(document.createTextNode(content));
+                    
+                    if (info == "abstract"){ 
+                        var span = document.createElement("spam");
+                        span.classList.add("tooltiptext")    
+                        span.appendChild(document.createTextNode(json[i]["doctype"]));
+                        publication_i.appendChild(span); }
+
                     publication_i.appendChild(ele);
                 }
                 
@@ -229,9 +236,10 @@ const button = document.getElementById('currentpage');
 
     if (link == "publi"){
         loadpub();
+    }
+    if (link == "proj"){
         autoScroll();
     }
-
     if (link == "into"){
         add_markdown ()
     }
@@ -286,10 +294,10 @@ const button = document.getElementById('currentpage');
 // -------- Srcoll of images --------
 
 var scrollHandler = null;
-  
+var pause_user = null;
 function autoScroll () {
-    clearInterval(scrollHandler);
-
+    localStorage['image_isover'] = false
+    if (scrollHandler!= null){clearInterval(scrollHandler);}
     var endscroll = document.getElementById("public")
     scrollHandler = setInterval(function() {
         if (document.getElementById("public") == null){
@@ -304,19 +312,24 @@ function autoScroll () {
             if (document.getElementById("public").scrollLeft < endscroll-500){
                 document.getElementById("public").scrollLeft += endscroll;
             }
-        }
 
+            document.getElementById("public").addEventListener("mouseover", async function(){
+                setTimeout(() => {
+                    clearInterval(scrollHandler);
+                }, 1);
+            document.getElementById("public").addEventListener("mouseleave", async function(){
+                clearTimeout(pause_user)
+                autoScroll();
+            });
+            })
+
+        }
+        
     },0.001);
+
+
 };
 
- function handleOnScroll () {
-  clearInterval(scrollHandler);
-  setTimeout(autoScroll, 10);
- };
- 
-$(document).ready(function() {
-    autoScroll();
-});
  
 function add_markdown () {
     const converter = new showdown.Converter(); 
@@ -327,14 +340,28 @@ function add_markdown () {
  
 function copypipinstall ()  {
     navigator.clipboard.writeText("pip install GreeDS");
+    alert(document.getElementById("cp-pip").src)
+    document.getElementById("cp-pip").src = "../done.png"
+    setTimeout(() => {
+        alert(document.getElementById("cp-pip").src)
+        document.getElementById("cp-pip").src = "../cp.png"
+    }, 1000);
 };
 
 function copyimport ()  {
     navigator.clipboard.writeText("from  GreeDS import  GreeDS\nfrom  vip_hci.fits import  open_fits\ncube = open_fits( 'your_cube.fits')\nangles = open_fits( 'your_PA_angles.fits')\nref = open_fits( 'your_refs.fits')");
+    document.getElementById("cp-import").src = "../done.png"
+    setTimeout(() => {
+        document.getElementById("cp-import").src = "../cp.png"
+    }, 1000);
 };
 
 function copygreeds ()  {
     navigator.clipboard.writeText("r = 10 # Iteration over PCA-rank\nl = 10 # Iteration per rank\nr_start = 1 # PCA-rank to start iteration (good for faint signals)\npup_size = 3 # Radius of numerical mask to hide coro\nres = GreeDS(cube, angles, r=r, l=l, r_start=r_start, pup_size=pup_size)");
+    document.getElementById("cp-greeds").src = "../done.png"
+    setTimeout(() => {
+        document.getElementById("cp-greeds").src = "../cp.png"
+    }, 1000);
 };
 
 function zoomMap(){
@@ -416,8 +443,8 @@ function USAMap(){
     let contHeight = parseInt(container.height);
 
     
-    document.getElementById("map_container").scrollLeft = 0.2*svgWidth - contWidth/2;
-    document.getElementById("map_container").scrollTop = 0.4*svgHeight - contHeight/2;
+    document.getElementById("map_container").scrollLeft = 0.135*svgWidth - contWidth/2;
+    document.getElementById("map_container").scrollTop = 0.38*svgHeight - contHeight/2;
 
     localStorage['map_focus'] = "USA"
 
@@ -451,23 +478,93 @@ function elemHighlight(elem_hovered){
 
 }  
 
+
 async function setMap(){
 
     var elem = document.getElementsByClassName('map_elem')
     for (let i = 0; i < elem.length; i++) {
-        elem[i].addEventListener("mouseover", function(){
-            document.getElementById('legend-text').innerHTML = elem[i].id;
-            fetch("map_places/"+elem[i].id+".html")
-            .then(response=> response.text())
-            .then(text=>  document.getElementById('legend-text').innerHTML = text)
-            .then(elemHighlight(elem[i]))
+        elem[i].addEventListener("mouseover", async function(){
+           
+            if(document.getElementById('legend-text').innerHTML.includes(elem[i].id) == false){
+                document.getElementById('legend-text').style.opacity = 0
+                document.getElementById('legend-text').innerHTML = elem[i].id
+                op = 0.005
+                clearInterval(localStorage["current-map-timer"])
+                localStorage["current-map-timer"] = ele_map_timer = setInterval(async function () {
+                    if (op == 1){ clearInterval(ele_map_timer); }
+                    document.getElementById('legend-text').style.opacity = op;
+                    op += op + 0.000005;
+                }, 20);
+
+                await fetch("map_places/"+elem[i].id+".html")
+                .then(response=> response.text())
+                .then(text=>  document.getElementById('legend-text').innerHTML = text)
+                .then(elemHighlight(elem[i]))  
+            }
+
+        });
+        elem[i].addEventListener("click", async function(){
+    
+            if(document.getElementById('legend-text').innerHTML.includes(elem[i].id) == false){
+                document.getElementById('legend-text').style.opacity = 0
+                document.getElementById('legend-text').innerHTML = elem[i].id
+                op = 0.005
+                clearInterval(localStorage["current-map-timer"])
+                localStorage["current-map-timer"] = ele_map_timer = setInterval(async function () {
+                    if (op == 1){ clearInterval(ele_map_timer); }
+                    document.getElementById('legend-text').style.opacity = op;
+                    op += op + 0.000005;
+                }, 70);
+
+                await fetch("map_places/"+elem[i].id+".html")
+                .then(response=> response.text())
+                .then(text=>  document.getElementById('legend-text').innerHTML = text)
+                .then(elemHighlight(elem[i]))  
+            }
+
             
         });
-    
-    } 
+        }
+        document.getElementById('map_container').addEventListener("mouseover", async function(e){
+            clearInterval(localStorage["current-move-timer"])
+            localStorage["current-move-timer"] = move_map_timer = setInterval(async function () {
+                
+                document.getElementById('map_container')
+                var position = document.getElementById('map_container').getBoundingClientRect();
+                var x = position.left;
+                var y = position.top;
+
+                X_client = e.clientX
+                Y_client = e.clientY
+                if  (X_client>x+40 && X_client<x+position.width-40 && Y_client<y+position.height-40 && Y_client>y+40){
+                    clearInterval(localStorage["current-move-timer"])
+                }
+                if (X_client<x+40){
+                    document.getElementById("map_container").scrollLeft = document.getElementById("map_container").scrollLeft -1;
+                
+                }
+                if (X_client>x+position.width-40){
+                    document.getElementById("map_container").scrollLeft = document.getElementById("map_container").scrollLeft +1;
+                
+                }
+                if (Y_client<y+40){
+                    document.getElementById("map_container").scrollTop = document.getElementById("map_container").scrollTop -1;
+                
+                }
+                if (Y_client>y+position.height-40){
+                    document.getElementById("map_container").scrollTop = document.getElementById("map_container").scrollTop +1;
+                
+                }
+
+            }, 5);
+
+        })
+        document.getElementById('svgMap').addEventListener("mouseleave", async function(){
+            clearInterval(localStorage["current-move-timer"])
+        })
 
 
-      document.getElementById('LK').addEventListener("click", (event) => {
+    document.getElementById('LK').addEventListener("click", (event) => {
         var elem = document.getElementsByClassName('visitedland')
         for (let i = 0; i < elem.length; i++) {
             elem[i].style.fill = "#b65dfa";
@@ -477,6 +574,12 @@ async function setMap(){
 }  
 
 function NextMap(){
+
+    svg = document.getElementById("svgMap");
+    container = document.getElementById("map_container").getBoundingClientRect()
+    svg.setAttribute('height', `${(4057*1.5)}`);
+    svg.setAttribute('width', `${(5000*1.5)}`);
+
     var elem = document.getElementsByClassName('map_elem')
     id = localStorage['last_com']
 
@@ -492,6 +595,16 @@ function NextMap(){
     else{
         EuropeMap();
     }
+    document.getElementById('legend-text').style.opacity = 0
+    op = 0.005
+    clearInterval(localStorage["current-map-timer"])
+    localStorage["current-map-timer"] = ele_map_timer = setInterval(async function () {
+        if (op == 1){ clearInterval(ele_map_timer); }
+        document.getElementById('legend-text').style.opacity = op;
+        op += op + 0.000005;
+    }, 70);
+
+
     fetch("map_places/"+elem[id].id+".html")
     .then(response=> response.text())
     .then(text=>  document.getElementById('legend-text').innerHTML = text)

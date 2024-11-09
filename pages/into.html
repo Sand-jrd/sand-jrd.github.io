@@ -43,13 +43,13 @@
 <p>Download IPCA via <a class="inlinelink" href="https://pypi.org/project/GreeDS/">PyPI</a>:</p>
 
 <div class="inlinecode">
-pip install GreeDS <button onclick="copypipinstall()"><img src="../cp.png" title="Copy Text to Clipboard" style="width: 15px;"></button>
+pip install GreeDS <button onclick="copypipinstall()"><img id="cp-pip" src="../cp.png" title="Copy Text to Clipboard" style="width: 15px;"></button>
 </div>
 
 <p>Exemple usage</p>
 
 <pre>
-    <div class="codetitle">Import package and load data</code><button title="Copy Text to Clipboard"  class="inblock" onclick="copyimport()"><img src="../cp.png" style="width: 30px;"></button></div>
+    <div class="codetitle">Import package and load data</code><button title="Copy Text to Clipboard"  class="inblock" onclick="copyimport()"><img id="cp-import"  src="../cp.png" style="width: 30px;"></button></div>
 <code> <span class="keyword">from</span>  <span class="function">GreeDS</span> <span class="keyword">import</span>  <span class="function">GreeDS</span>
   <span class="keyword">from</span>  <span class="function">vip_hci.fits</span> <span class="keyword">import</span>  <span class="function">open_fits</span>
 
@@ -57,7 +57,7 @@ pip install GreeDS <button onclick="copypipinstall()"><img src="../cp.png" title
   <span class="variable">angles</span> = <span class="function">open_fits</span>( <span class="string">"your_PA_angles.fits"</span>)</span>
   <span class="variable">ref</span> = <span class="function">open_fits</span>( <span class="string">"your_refs.fits"</span>)</span></code></pre>
 
- <pre>    <div class="codetitle">Use IPCA<button class="inblock" title="Copy Text to Clipboard" onclick="copygreeds()"><img src="../cp.png" style="width: 30px;"></button></div>
+ <pre>    <div class="codetitle">Use IPCA<button class="inblock" title="Copy Text to Clipboard" onclick="copygreeds()"><img id="cp-greeds" src="../cp.png" style="width: 30px;"></button></div>
 <code> <span class="variable">r</span> = <span class="number">10</span> <span class="comment"># Iteration over PCA-rank</span>
   <span class="variable">l</span> = <span class="number">10</span> <span class="comment"># Iteration per rank</span>
   <span class="variable">r_start</span> = <span class="number">1</span> <span class="comment"># PCA-rank to start iteration (good for faint signals)</span>
