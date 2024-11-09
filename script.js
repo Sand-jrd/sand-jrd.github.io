@@ -340,10 +340,8 @@ function add_markdown () {
  
 function copypipinstall ()  {
     navigator.clipboard.writeText("pip install GreeDS");
-    alert(document.getElementById("cp-pip").src)
     document.getElementById("cp-pip").src = "../done.png"
     setTimeout(() => {
-        alert(document.getElementById("cp-pip").src)
         document.getElementById("cp-pip").src = "../cp.png"
     }, 1000);
 };
