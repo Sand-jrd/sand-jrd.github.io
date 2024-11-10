@@ -228,20 +228,22 @@ const button = document.getElementById('currentpage');
     var link = url.substring(5+url.indexOf('page='))
     gotosec(link)
 
-    if (link == "com"){
-        setMap()
-        HomeMap()
-        setHeight() 
-    }
-
     if (link == "publi"){
         loadpub();
-    }
-    if (link == "proj"){
         autoScroll();
     }
     if (link == "into"){
         add_markdown ()
+    }
+
+    if (link == "com"){
+        setMap()
+        HomeMap()
+        setHeight() 
+        window.addEventListener("resize", setHeight);
+    }
+    if (link == "proj"){
+        autoScroll();
     }
 
 });
@@ -274,18 +276,23 @@ const button = document.getElementById('currentpage');
     navbar.style["background-color"] = barcolor.style["background-color"];
 
     if (link == "publi"){
-        await loadpub();
+        loadpub();
         autoScroll();
     }
     if (link == "into"){
-        await add_markdown ()
+        add_markdown ()
     }
 
     if (link == "com"){
-        await setMap()
-        await HomeMap()
-        await setHeight() 
+        setMap()
+        HomeMap()
+        setHeight() 
+        window.addEventListener("resize", setHeight);
     }
+    if (link == "proj"){
+        autoScroll();
+    }
+
 
     localStorage['last_page'] = link
 
@@ -358,34 +365,10 @@ function copygreeds ()  {
     }, 1000);
 };
 
-function zoomMap(){
 
-    scale=1.6
-    svg = document.getElementById("svgMap");
-    container = document.getElementById("map_container").getBoundingClientRect()
+function zoomMap(scalestr){
 
-    let svgWidth = parseInt(svg.getAttribute('width'));
-    let svgHeight = parseInt(svg.getAttribute('height'));
-    let contWidth = parseInt(container.width);
-    let contHeight = parseInt(container.height);
-
-    focus_left = (document.getElementById("map_container").scrollLeft + contWidth/2) /svgWidth;
-    focus_top = (document.getElementById("map_container").scrollTop + contHeight/2) /svgHeight; 
-
-    svg.setAttribute('width', `${(svgWidth * scale)}`);
-    svg.setAttribute('height', `${(svgHeight * scale)}`);
-
-    document.getElementById("map_container").scrollLeft = focus_left*svgWidth * scale - contWidth/2;
-    document.getElementById("map_container").scrollTop = focus_top*svgHeight * scale - contHeight/2;
-
-};
-
-
-
-function unzoomMap(){
-
-    scale=0.6
-
+    scale = parseFloat(scalestr)
     svg = document.getElementById("svgMap");
     container = document.getElementById("map_container").getBoundingClientRect()
 
@@ -472,9 +455,15 @@ function elemHighlight(elem_hovered){
 
 }  
 
+var isTouchPad = False; // Assume by default that it is mousePad
+var wheelevent = False; // Assume by default that it is mousePad
+var intervalleft = null;
+var intervalright = null;
+var intervalup = null;
+var intervaldown = null;
 
 async function setMap(){
-
+    
     var elem = document.getElementsByClassName('map_elem')
     for (let i = 0; i < elem.length; i++) {
         elem[i].addEventListener("mouseover", async function(){
@@ -518,42 +507,67 @@ async function setMap(){
 
             
         });
+    }
+        
+    wheelevent = document.getElementById('svgMap').addEventListener("mousewheel", async function(e){ 
+        
+        isTouchPad = e.wheelDeltaY ? e.wheelDeltaY === -3 * e.deltaY : e.deltaMode === 0
+        
+        if (isTouchPad==false){
+                document.getElementById('map_container').style["overflow-y"] = "hidden";
+                document.getElementById('map_container').style["overflow-x"] = "hidden";
+                zoomMap(e.deltaY)
+            }
+        else{
+            document.getElementById('map_container').style["overflow-y"] = "scroll";
+            document.getElementById('map_container').style["overflow-x"] = "scroll";
         }
-        document.getElementById('map_container').addEventListener("mouseover", async function(e){
-            clearInterval(localStorage["current-move-timer"])
-            localStorage["current-move-timer"] = move_map_timer = setInterval(async function () {
-                
-                document.getElementById('map_container')
-                var position = document.getElementById('map_container').getBoundingClientRect();
-                var x = position.left;
-                var y = position.top;
+        });
 
-                X_client = e.clientX
-                Y_client = e.clientY
-                if  (X_client>x+40 && X_client<x+position.width-40 && Y_client<y+position.height-40 && Y_client>y+40){
-                    clearInterval(localStorage["current-move-timer"])
-                }
-                if (X_client<x+40){
-                    document.getElementById("map_container").scrollLeft = document.getElementById("map_container").scrollLeft -1;
-                
-                }
-                if (X_client>x+position.width-40){
-                    document.getElementById("map_container").scrollLeft = document.getElementById("map_container").scrollLeft +1;
-                
-                }
-                if (Y_client<y+40){
-                    document.getElementById("map_container").scrollTop = document.getElementById("map_container").scrollTop -1;
-                
-                }
-                if (Y_client>y+position.height-40){
-                    document.getElementById("map_container").scrollTop = document.getElementById("map_container").scrollTop +1;
-                
-                }
+        document.getElementById('arrow-right').addEventListener("mouseover", async function(e){
+            change_botton_visibility(true)
+            clearInterval(intervalright)
+            intervalright = setInterval(async function () {
+                document.getElementById("map_container").scrollLeft = document.getElementById("map_container").scrollLeft +1;
+            }, 5); });
+        document.getElementById('arrow-right').addEventListener("mouseleave", async function(){
+            clearInterval(intervalright)
+            change_botton_visibility(false)
+        })    
 
-            }, 5);
-
-        })
+        document.getElementById('arrow-left').addEventListener("mouseover", async function(e){
+            clearInterval(intervalleft)
+            change_botton_visibility(true)
+            intervalleft = setInterval(async function () {
+                document.getElementById("map_container").scrollLeft = document.getElementById("map_container").scrollLeft -1;
+            }, 5); });
+        document.getElementById('arrow-left').addEventListener("mouseleave", async function(){
+            clearInterval(intervalleft)
+            change_botton_visibility(false)
+        })    
+        document.getElementById('arrow-up').addEventListener("mouseover", async function(e){
+            clearInterval(intervalup)
+            change_botton_visibility(true)
+            intervalup = setInterval(async function () {
+                document.getElementById("map_container").scrollTop = document.getElementById("map_container").scrollTop -1;
+            }, 5); });
+        document.getElementById('arrow-up').addEventListener("mouseleave", async function(){
+            clearInterval(intervalup)
+            change_botton_visibility(false)
+        })    
+        document.getElementById('arrow-down').addEventListener("mouseover", async function(e){
+            clearInterval(intervaldown)
+            change_botton_visibility(true)
+            intervaldown = setInterval(async function () {
+                document.getElementById("map_container").scrollTop = document.getElementById("map_container").scrollTop +1;
+            }, 5); });
+        document.getElementById('arrow-down').addEventListener("mouseleave", async function(){
+            clearInterval(intervaldown)
+            change_botton_visibility(false)
+        })    
+   
         document.getElementById('svgMap').addEventListener("mouseleave", async function(){
+            change_botton_visibility(false)
             clearInterval(localStorage["current-move-timer"])
         })
 
@@ -636,8 +650,28 @@ function setHeight() {
         document.getElementById('legend').style.height = "70vh";
         document.getElementById('legend').style.overflowY = "scroll";
 
-
         }
+
+    var position = document.getElementById('map_container').getBoundingClientRect();
+
+    var x = position.left;
+    var y = position.top;
+    var height = position.height;
+    var width = position.width;
+    document.getElementById('arrow-left').style.height=(height).toString()+"px"
+    document.getElementById('arrow-left').style.top=(y).toString()+"px"
+    document.getElementById('arrow-left').style.left=(x).toString()+"px"
+    document.getElementById('arrow-right').style.height=(height).toString()+"px"
+    document.getElementById('arrow-right').style.top=(y).toString()+"px"
+    document.getElementById('arrow-right').style.left=(x+width-30).toString()+"px"
+    document.getElementById('arrow-up').style.top=(y).toString()+"px"
+    document.getElementById('arrow-up').style.left=(x).toString()+"px"
+    document.getElementById('arrow-up').style.width=(width).toString()+"px"
+
+    document.getElementById('arrow-down').style.top=(y+height-31).toString()+"px"
+    document.getElementById('arrow-down').style.left=(x).toString()+"px"
+    document.getElementById('arrow-down').style.width=(width).toString()+"px"
+
 
 }
 
@@ -645,4 +679,19 @@ window.addEventListener('resize', setHeight);
 
 
 
-  
+function change_botton_visibility(active){
+    if(active==true){
+        opacity = 0.5
+        zindex= 5;
+    }else{
+        opacity = 0
+        zindex= 0;
+    }
+    var elem = document.getElementsByClassName('move_botton')
+    for (let i = 0; i < elem.length; i++) {
+        elem[i].style.opacity = opacity;
+        elem[i].style["z-index"] = zindex;
+
+    } 
+
+}
