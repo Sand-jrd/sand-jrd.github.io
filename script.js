@@ -294,7 +294,6 @@ const button = document.getElementById('currentpage');
 // -------- Srcoll of images --------
 
 var scrollHandler = null;
-var pause_user = null;
 function autoScroll () {
     localStorage['image_isover'] = false
     if (scrollHandler!= null){clearInterval(scrollHandler);}
@@ -313,12 +312,9 @@ function autoScroll () {
                 document.getElementById("public").scrollLeft += endscroll;
             }
 
-            document.getElementById("public").addEventListener("mouseover", async function(){
-                setTimeout(() => {
-                    clearInterval(scrollHandler);
-                }, 1);
+            document.getElementById("public").addEventListener("mouseenter", async function(){
+                clearInterval(scrollHandler);
             document.getElementById("public").addEventListener("mouseleave", async function(){
-                clearTimeout(pause_user)
                 autoScroll();
             });
             })
