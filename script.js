@@ -694,7 +694,7 @@ function change_botton_visibility(active){
 
 }
 
-var rat_speed = 1
+var rat_speed = 1.2
 var gameover = true;
 
 function move_rat(){
@@ -775,8 +775,8 @@ function isFromge(){
             
                 ratdoodle.setAttribute('transform',Ratpos[0]+') scale('+(donaSize+0.2).toString()+')');
     
-                var newX = (Math.floor(Math.random() * 1700)).toString();
-                var newY = (Math.floor(Math.random() * 800)).toString();
+                var newX = (30+Math.floor(Math.random() * 1700)).toString();
+                var newY = (30+Math.floor(Math.random() * 800)).toString();
                 fromage.setAttribute('transform','translate('+newX+','+newY+') '+scaleFromage[0]);
                 rat_speed = rat_speed+0.3
             } 
