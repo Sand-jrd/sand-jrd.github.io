@@ -711,7 +711,7 @@ function move_rat(){
             var parts  = /translate\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
             var firstX = parts[1];
             var firstY = parts[2];
-            var scale = /scale+\(\s*([^\s])+\)/.exec(xforms);
+            var scale = /scale\(\s*([^\s,)]+)\)/.exec(xforms);
             var scaleint = parseFloat(scale[1])
             switch (event.key) {
             case "ArrowDown":
@@ -759,28 +759,22 @@ function isFromge(){
     var Ratpos  = /translate\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
     var ratX = parseFloat(Ratpos[1]);
     var ratY = parseFloat(Ratpos[2]);
-    var scale = /scale+\(\s*([^\s])+\)/.exec(xforms);
-    var scaleint = parseFloat(scale[1])
-
+    var scale = /scale\(\s*([^\s,)]+)\)/.exec(xforms);
+    var donaSize = parseFloat(scale[1])
 
     fromage = document.getElementById('Fromage')
     var xforms = fromage.getAttribute('transform');
     var parts  = /translate\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
     var cheeseX = parseFloat(parts[1]);
     var cheeseY = parseFloat(parts[2]);
-    var scaleFromage = /scale+\(\s*([^\s])+\)/.exec(xforms);
+    var scaleFromage = /scale\(\s*([^\s,)]+)\)/.exec(xforms);
 
-    if(cheeseX-50*scaleint <  ratX && cheeseX+50*scaleint > ratX
-        && cheeseY-50*scaleint < ratY && cheeseY+50*scaleint > ratY){
+    if(cheeseX-50*donaSize <  ratX && cheeseX+50*donaSize > ratX
+        && cheeseY-50*donaSize < ratY && cheeseY+50*donaSize > ratY){
+            alert(donaSize)
+            if (donaSize+0.2 < 2.2){ 
             
-            if (scaleint+0.2 < 2.2){ 
-                ratdoodle = document.getElementById('ratdoodle')
-                var xforms = ratdoodle.getAttribute('transform');
-                var scale = /scale+\(\s*([^\s])+\)/.exec(xforms);
-                var scaleint = parseFloat(scale[1])
-            
-                var newS = (scaleint+0.2).toString();
-                ratdoodle.setAttribute('transform',Ratpos[0]+') scale('+newS+')');
+                ratdoodle.setAttribute('transform',Ratpos[0]+') scale('+(donaSize+0.2).toString()+')');
     
                 var newX = (Math.floor(Math.random() * 1700)).toString();
                 var newY = (Math.floor(Math.random() * 800)).toString();
@@ -823,7 +817,7 @@ function eatTheMouse(){
     var Ratpos  = /translate\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
     var ratX = parseFloat(Ratpos[1]);
     var ratY = parseFloat(Ratpos[2]);
-    var scale = /scale+\(\s*([^\s])+\)/.exec(xforms);
+    var scale = /scale\(\s*([^\s,)]+)\)/.exec(xforms);
     var scaleint = parseFloat(scale[1])
 
     return (BADratX-50*scaleint <  ratX && BADratX+50*scaleint > ratX
