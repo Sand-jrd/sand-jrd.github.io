@@ -455,8 +455,8 @@ function elemHighlight(elem_hovered){
 
 }  
 
-var isTouchPad = False; // Assume by default that it is mousePad
-var wheelevent = False; // Assume by default that it is mousePad
+var isTouchPad = false; // Assume by default that it is mousePad
+var wheelevent = false; // Assume by default that it is mousePad
 var intervalleft = null;
 var intervalright = null;
 var intervalup = null;
@@ -693,5 +693,110 @@ function change_botton_visibility(active){
         elem[i].style["z-index"] = zindex;
 
     } 
+
+}
+
+
+function move_rat(){
+
+    window.addEventListener("keydown", function (event) {
+        if (event.defaultPrevented) {
+          return; // Do nothing if the event was already processed
+        }
+
+        ratdoodle = document.getElementById('ratdoodle')
+        var xforms = ratdoodle.getAttribute('transform');
+        var parts  = /translate\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
+        var firstX = parts[1];
+        var firstY = parts[2];
+        var scale = /scale+\(\s*([^\s])+\)/.exec(xforms);
+        var scaleint = parseFloat(scale[1])
+        switch (event.key) {
+          case "ArrowDown":
+            var newY = (parseFloat(firstY) + 30).toString();
+            if (parseFloat(firstY) + 30 <= 867-20*scaleint){
+                ratdoodle.setAttribute('transform','translate('+firstX+','+newY+') '+scale[0]);
+                isFromge()
+            }
+            break;
+          case "ArrowUp":
+            var newY = (parseFloat(firstY) - 30).toString();
+            if (parseFloat(firstY) - 30 >= 0){
+                ratdoodle.setAttribute('transform','translate('+firstX+','+newY+') '+scale[0]);
+                isFromge()
+            }
+            break;
+          case "ArrowLeft":
+            var newX = (parseFloat(firstX) - 30).toString();
+            if (parseFloat(firstX) - 30  >= 0){
+                ratdoodle.setAttribute('transform','translate('+newX+','+firstY+') '+scale[0]);
+                isFromge()
+            }
+            break;
+          case "ArrowRight":
+            var newX = (parseFloat(firstX) + 30).toString();
+            if (parseFloat(firstX) + 30  <= 1800-50*scaleint){
+                ratdoodle.setAttribute('transform','translate('+newX+','+firstY+') '+scale[0]);
+                isFromge()
+            }
+            break;
+          default:
+            return; // Quit when this doesn't handle the key event.
+        }
+        
+        event.preventDefault();
+    }, true);
+    
+}
+
+function isFromge(){
+
+    ratdoodle = document.getElementById('ratdoodle')
+    var xforms = ratdoodle.getAttribute('transform');
+    var Ratpos  = /translate\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
+    var ratX = parseFloat(Ratpos[1]);
+    var ratY = Ratpos[2];
+    var scale = /scale+\(\s*([^\s])+\)/.exec(xforms);
+    var scaleint = parseFloat(scale[1])
+
+
+    fromage = document.getElementById('Fromage')
+    var xforms = fromage.getAttribute('transform');
+    var parts  = /translate\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
+    var cheeseX = parseFloat(parts[1]);
+    var cheeseY = parseFloat(parts[2]);
+    var scaleFromage = /scale+\(\s*([^\s])+\)/.exec(xforms);
+
+    if(cheeseX-50*scaleint <  ratX && cheeseX+50*scaleint > ratX
+        && cheeseY-50*scaleint < ratY && cheeseY+50*scaleint > ratY){
+            
+            if (parseFloat(scale[1])*1.2 < 5){ 
+                var newS = (parseFloat(scale[1])*1.2).toString();
+                ratdoodle.setAttribute('transform',Ratpos[0]+') scale('+newS+')');
+    
+                var newX = (Math.floor(Math.random() * 1700)).toString();
+                var newY = (Math.floor(Math.random() * 800)).toString();
+                fromage.setAttribute('transform','translate('+newX+','+newY+') '+scaleFromage[0]);
+            } 
+            else{
+                document.getElementById('ratdoodle').setAttribute('transform','translate(400 200) scale(8)');
+                document.getElementById('Fromage').setAttribute('transform','translate(200 100) scale(5)');
+                document.getElementById('textaward').setAttribute('transform','translate(20 40)');
+                document.getElementById('heartaward').setAttribute('transform','translate(20 40)');
+                document.getElementById('Award').style.opacity=1;
+            }
+
+    }
+
+
+}
+
+async function gameStart(){
+    var divout = document.getElementById('gamecanbehere')
+
+    await fetch("pages/gameRat.html")
+    .then(response=> response.text())
+    .then(text=> divout.innerHTML = text)
+    .then(move_rat());
 
 }
