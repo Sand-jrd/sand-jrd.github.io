@@ -771,7 +771,6 @@ function isFromge(){
 
     if(cheeseX-50*donaSize <  ratX && cheeseX+50*donaSize > ratX
         && cheeseY-50*donaSize < ratY && cheeseY+50*donaSize > ratY){
-            alert(donaSize)
             if (donaSize+0.2 < 2.2){ 
             
                 ratdoodle.setAttribute('transform',Ratpos[0]+') scale('+(donaSize+0.2).toString()+')');
