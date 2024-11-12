@@ -189,7 +189,6 @@ function suiv(){alert("Not implemented");}
 function prev(){alert("Not implemented");}
 
 // -------- Line under titles --------
-
 $(document).ready(function() {
     
     // Get max width
@@ -209,7 +208,6 @@ $(document).ready(function() {
     // Init map list
     localStorage['last_com'] = 0
 
-    
 });
 
 
@@ -696,6 +694,8 @@ function change_botton_visibility(active){
 
 }
 
+var rat_speed = 1
+var gameover = true;
 
 function move_rat(){
 
@@ -703,51 +703,54 @@ function move_rat(){
         if (event.defaultPrevented) {
           return; // Do nothing if the event was already processed
         }
+        if (document.getElementById('textloose').style.opacity==1){ return; }
+        else{
 
-        ratdoodle = document.getElementById('ratdoodle')
-        var xforms = ratdoodle.getAttribute('transform');
-        var parts  = /translate\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
-        var firstX = parts[1];
-        var firstY = parts[2];
-        var scale = /scale+\(\s*([^\s])+\)/.exec(xforms);
-        var scaleint = parseFloat(scale[1])
-        switch (event.key) {
-          case "ArrowDown":
-            var newY = (parseFloat(firstY) + 30).toString();
-            if (parseFloat(firstY) + 30 <= 867-20*scaleint){
-                ratdoodle.setAttribute('transform','translate('+firstX+','+newY+') '+scale[0]);
-                isFromge()
+            ratdoodle = document.getElementById('ratdoodle')
+            var xforms = ratdoodle.getAttribute('transform');
+            var parts  = /translate\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
+            var firstX = parts[1];
+            var firstY = parts[2];
+            var scale = /scale+\(\s*([^\s])+\)/.exec(xforms);
+            var scaleint = parseFloat(scale[1])
+            switch (event.key) {
+            case "ArrowDown":
+                var newY = (parseFloat(firstY) + 10*rat_speed).toString();
+                if (parseFloat(firstY) + 30 <= 867-20*scaleint){
+                    ratdoodle.setAttribute('transform','translate('+firstX+','+newY+') '+scale[0]);
+                    isFromge()
+                }
+                break;
+            case "ArrowUp":
+                var newY = (parseFloat(firstY) - 10*rat_speed).toString();
+                if (parseFloat(firstY) - 30 >= 0){
+                    ratdoodle.setAttribute('transform','translate('+firstX+','+newY+') '+scale[0]);
+                    isFromge()
+                }
+                break;
+            case "ArrowLeft":
+                var newX = (parseFloat(firstX) - 10*rat_speed).toString();
+                if (parseFloat(firstX) - 30  >= 0){
+                    ratdoodle.setAttribute('transform','translate('+newX+','+firstY+') '+scale[0]);
+                    isFromge()
+                }
+                break;
+            case "ArrowRight":
+                var newX = (parseFloat(firstX) + 10*rat_speed).toString();
+                if (parseFloat(firstX) + 30  <= 1800-50*scaleint){
+                    ratdoodle.setAttribute('transform','translate('+newX+','+firstY+') '+scale[0]);
+                    isFromge()
+                }
+                break;
+            default:
+                return; // Quit when this doesn't handle the key event.
             }
-            break;
-          case "ArrowUp":
-            var newY = (parseFloat(firstY) - 30).toString();
-            if (parseFloat(firstY) - 30 >= 0){
-                ratdoodle.setAttribute('transform','translate('+firstX+','+newY+') '+scale[0]);
-                isFromge()
-            }
-            break;
-          case "ArrowLeft":
-            var newX = (parseFloat(firstX) - 30).toString();
-            if (parseFloat(firstX) - 30  >= 0){
-                ratdoodle.setAttribute('transform','translate('+newX+','+firstY+') '+scale[0]);
-                isFromge()
-            }
-            break;
-          case "ArrowRight":
-            var newX = (parseFloat(firstX) + 30).toString();
-            if (parseFloat(firstX) + 30  <= 1800-50*scaleint){
-                ratdoodle.setAttribute('transform','translate('+newX+','+firstY+') '+scale[0]);
-                isFromge()
-            }
-            break;
-          default:
-            return; // Quit when this doesn't handle the key event.
         }
-        
         event.preventDefault();
     }, true);
     
 }
+
 
 function isFromge(){
 
@@ -755,7 +758,7 @@ function isFromge(){
     var xforms = ratdoodle.getAttribute('transform');
     var Ratpos  = /translate\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
     var ratX = parseFloat(Ratpos[1]);
-    var ratY = Ratpos[2];
+    var ratY = parseFloat(Ratpos[2]);
     var scale = /scale+\(\s*([^\s])+\)/.exec(xforms);
     var scaleint = parseFloat(scale[1])
 
@@ -770,15 +773,22 @@ function isFromge(){
     if(cheeseX-50*scaleint <  ratX && cheeseX+50*scaleint > ratX
         && cheeseY-50*scaleint < ratY && cheeseY+50*scaleint > ratY){
             
-            if (parseFloat(scale[1])*1.2 < 5){ 
-                var newS = (parseFloat(scale[1])*1.2).toString();
+            if (scaleint+0.2 < 2.2){ 
+                ratdoodle = document.getElementById('ratdoodle')
+                var xforms = ratdoodle.getAttribute('transform');
+                var scale = /scale+\(\s*([^\s])+\)/.exec(xforms);
+                var scaleint = parseFloat(scale[1])
+            
+                var newS = (scaleint+0.2).toString();
                 ratdoodle.setAttribute('transform',Ratpos[0]+') scale('+newS+')');
     
                 var newX = (Math.floor(Math.random() * 1700)).toString();
                 var newY = (Math.floor(Math.random() * 800)).toString();
                 fromage.setAttribute('transform','translate('+newX+','+newY+') '+scaleFromage[0]);
+                rat_speed = rat_speed+0.3
             } 
             else{
+                gameover = true;
                 document.getElementById('ratdoodle').setAttribute('transform','translate(400 200) scale(8)');
                 document.getElementById('Fromage').setAttribute('transform','translate(200 100) scale(5)');
                 document.getElementById('textaward').setAttribute('transform','translate(20 40)');
@@ -797,6 +807,65 @@ async function gameStart(){
     await fetch("pages/gameRat.html")
     .then(response=> response.text())
     .then(text=> divout.innerHTML = text)
-    .then(move_rat());
+    .then(move_rat())
+    .then(meanRatMove());
 
 }
+
+function eatTheMouse(){
+   
+    var xforms = document.getElementById('badrat').getAttribute('transform');
+    var Ratpos  = /translate\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
+    var BADratX = parseFloat(Ratpos[1]);
+    var BADratY = parseFloat(Ratpos[2]);
+
+    var xforms = document.getElementById('ratdoodle').getAttribute('transform');
+    var Ratpos  = /translate\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
+    var ratX = parseFloat(Ratpos[1]);
+    var ratY = parseFloat(Ratpos[2]);
+    var scale = /scale+\(\s*([^\s])+\)/.exec(xforms);
+    var scaleint = parseFloat(scale[1])
+
+    return (BADratX-50*scaleint <  ratX && BADratX+50*scaleint > ratX
+        && BADratY-50*scaleint < ratY && BADratY+50*scaleint > ratY)
+}
+    
+
+function meanRatMove(){
+
+    bad_rat_move = setInterval(async function () {
+
+        if (document.getElementById('Award').style.opacity==0){
+            if (eatTheMouse()==true){
+                badratdoodle = document.getElementById('badrat')
+                badratdoodle.setAttribute('transform','translate(500 200)  scale(8)');
+                document.getElementById('textloose').style.opacity=1;
+                clearInterval(bad_rat_move);
+            }
+            else{
+                badratdoodle = document.getElementById('badrat')
+                var xforms = badratdoodle.getAttribute('transform');
+                var Ratpos  = /translate\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
+                var ratX = parseFloat(Ratpos[1]);
+                var ratY = parseFloat(Ratpos[2]);
+                var newX = (parseFloat(ratX) +1).toString();
+                var newY = (parseFloat(ratY)).toString();
+
+                if (parseFloat(ratX) - rat_speed  <= 0){
+                    var newY = (Math.floor(Math.random() * 750)).toString();
+                    var newX = (1800).toString();
+
+                }else{
+                    var newX = (parseFloat(ratX) -rat_speed).toString();
+                }
+                badratdoodle.setAttribute('transform','translate('+newX+','+newY+')  scale(2)');
+
+            }
+        }else{
+            badratdoodle = document.getElementById('badrat').style.opacity=0;
+            badratdoodle = document.getElementById('Fromage').style.opacity=0;
+            clearInterval(bad_rat_move);}
+    }, 1);
+
+}
+
