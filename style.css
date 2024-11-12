@@ -653,7 +653,13 @@ text-align: center;
     right: 5%;
   
 }
-  
+
+#gamewidow{
+    display: block;
+    margin: auto;
+    width: 90%;
+}
+
 #ADS li:hover .tooltiptext {
 visibility: visible;
 opacity: 1;
