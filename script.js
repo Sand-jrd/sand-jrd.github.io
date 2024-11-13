@@ -696,6 +696,8 @@ function change_botton_visibility(active){
 
 var rat_speed = 1.2
 var gameover = true;
+var d1= "m1.02277,26.50293c0,0 -1.5634,-2.22473 0.62535,-3.19199c2.18875,-0.96724 9.38033,-9.72102 15.00849,-9.86611c0,0 0.31267,-8.70538 4.37747,-7.2545c4.06483,1.45092 2.18875,2.61161 2.18875,2.61161c0,0 6.8789,-7.54466 8.75498,0.87054c0,0 1.87605,2.17636 9.06762,-4.0625c7.19157,-6.23886 31.87538,-7.72169 43.77482,3.77234c7.66057,7.39959 18.29159,18.42643 10.00564,28.43763c0,0 4.79652,21.99093 -35.2816,18.68855c0,0 -15.52844,-2.72867 -23.50168,-2.43848c-7.97327,0.29016 -14.5395,2.75671 -10.63102,-0.58038c3.90844,-3.33706 14.38315,-3.33706 28.45362,-0.87054c14.07047,2.46655 36.58321,2.03127 36.58321,-12.76791c0,0 -3.43945,1.16073 -5.00282,0.29019c0,0 0.78167,3.19196 -3.75212,2.9018c-4.53383,-0.29019 -0.4981,2.46693 -5.18824,4.35307c0,0 -1.40705,0.87057 -1.87608,0c0,0 -2.34507,0 -1.56337,-0.87054c0,0 -1.32887,-0.50782 0,-1.45089c1.32887,-0.94307 2.37414,-4.86092 2.06147,-4.93345c-0.31267,-0.07253 0.15632,-0.94307 -0.62535,-0.87054c-0.7817,0.07253 -23.91982,1.37835 -30.01702,-0.29019c0,0 -0.31267,1.95873 -1.56337,1.16073c0,0 5.33787,3.44728 2.83648,4.68054c-2.50143,1.23329 -1.64158,0.29019 -2.50143,0.58038c-0.85988,0.29016 -1.7979,1.66851 -2.8141,0.87054c0,0 -3.43945,0.79798 -2.50143,-0.58038c0,0 -1.09434,0.36275 -1.56337,-0.58035c0,0 -1.48523,-0.43525 0.62535,-2.03127c2.11058,-1.59598 -6.27593,-3.88253 -5.65058,-4.68054c0.62538,-0.79801 0.39085,-1.37835 -1.56337,-1.16073c-1.95422,0.21763 -5.94088,-0.43525 -9.06765,-2.32143c-3.12678,-1.88617 -2.11492,-2.82408 -8.75494,-3.48218c-5.36761,-0.53198 -6.46199,-1.25743 -7.81692,-1.74108c-1.35497,-0.48362 -3.12678,-3.19196 -3.12678,-3.19196l-0.00001,0.00002z"
+var d2 ="m1.15383,26.50293c0,0 -1.5634,-2.22473 0.62535,-3.19199c2.18875,-0.96724 9.38033,-9.72102 15.00849,-9.86611c0,0 0.31267,-8.70538 4.37747,-7.2545c4.06483,1.45092 2.18875,2.61161 2.18875,2.61161c0,0 6.8789,-7.54466 8.75498,0.87054c0,0 1.87605,2.17636 9.06762,-4.0625c7.19157,-6.23886 31.87538,-7.72169 43.77482,3.77234c7.66057,7.39959 18.29159,18.42643 10.00564,28.43763c0,0 4.79652,21.99093 -35.2816,18.68855c0,0 -15.52844,-2.72867 -23.50168,-2.43848c-7.97327,0.29016 -14.5395,2.75671 -10.63102,-0.58038c3.90844,-3.33706 14.38315,-3.33706 28.45362,-0.87054c14.07047,2.46655 36.58321,2.03127 36.58321,-12.76791c0,0 -3.43945,1.16073 -5.00282,0.29019c0,0 0.78167,3.19196 -3.75212,2.9018c-4.53383,-0.29019 -8.75498,-1.59598 -13.44512,0.29016c0,0 -1.40705,0.87057 -1.87608,0c0,0 -2.34507,0 -1.56337,-0.87054c0,0 -1.32887,-0.50782 0,-1.45089c1.32887,-0.94307 10.63102,-0.79801 10.31835,-0.87054c-0.31267,-0.07253 0.15632,-0.94307 -0.62535,-0.87054c-0.7817,0.07253 -23.91982,1.37835 -30.01702,-0.29019c0,0 -0.31267,1.95873 -1.56337,1.16073c0,0 -11.56908,1.08817 -14.07047,2.32143c-2.50143,1.23329 -1.64158,0.29019 -2.50143,0.58038c-0.85988,0.29016 -1.7979,1.66851 -2.8141,0.87054c0,0 -3.43945,0.79798 -2.50143,-0.58038c0,0 -1.09434,0.36275 -1.56337,-0.58035c0,0 -1.48523,-0.43525 0.62535,-2.03127c2.11058,-1.59598 10.63102,-1.52342 11.25637,-2.32143c0.62538,-0.79801 0.39085,-1.37835 -1.56337,-1.16073c-1.95422,0.21763 -5.94088,-0.43525 -9.06765,-2.32143c-3.12678,-1.88617 -2.11492,-2.82408 -8.75494,-3.48218c-5.36761,-0.53198 -6.46199,-1.25743 -7.81692,-1.74108c-1.35497,-0.48362 -3.12678,-3.19196 -3.12678,-3.19196z"
 
 function move_rat(){
 
@@ -711,34 +713,39 @@ function move_rat(){
             var parts  = /translate\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
             var firstX = parts[1];
             var firstY = parts[2];
-            var scale = /scale\(\s*([^\s,)]+)\)/.exec(xforms);
-            var scaleint = parseFloat(scale[1])
+            var scale = /scale\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
+            var scaleint = parseFloat(scale[2])
+
+            if (document.getElementById('ratbody').getAttribute('d')==d2){
+                document.getElementById('ratbody').setAttribute('d',d1)
+            }else{document.getElementById('ratbody').setAttribute('d',d2)}
+    
             switch (event.key) {
             case "ArrowDown":
                 var newY = (parseFloat(firstY) + 10*rat_speed).toString();
                 if (parseFloat(firstY) + 30 <= 867-20*scaleint){
-                    ratdoodle.setAttribute('transform','translate('+firstX+','+newY+') '+scale[0]);
+                    ratdoodle.setAttribute('transform','translate('+firstX+','+newY+') '+scale[0]+")");
                     isFromge()
                 }
                 break;
             case "ArrowUp":
                 var newY = (parseFloat(firstY) - 10*rat_speed).toString();
                 if (parseFloat(firstY) - 30 >= 0){
-                    ratdoodle.setAttribute('transform','translate('+firstX+','+newY+') '+scale[0]);
+                    ratdoodle.setAttribute('transform','translate('+firstX+','+newY+') '+scale[0]+")");
                     isFromge()
                 }
                 break;
             case "ArrowLeft":
                 var newX = (parseFloat(firstX) - 10*rat_speed).toString();
                 if (parseFloat(firstX) - 30  >= 0){
-                    ratdoodle.setAttribute('transform','translate('+newX+','+firstY+') '+scale[0]);
+                    ratdoodle.setAttribute('transform','translate('+newX+','+firstY+') '+'scale('+(scaleint).toString()+','+(scaleint).toString()+') ');
                     isFromge()
                 }
                 break;
             case "ArrowRight":
                 var newX = (parseFloat(firstX) + 10*rat_speed).toString();
                 if (parseFloat(firstX) + 30  <= 1800-50*scaleint){
-                    ratdoodle.setAttribute('transform','translate('+newX+','+firstY+') '+scale[0]);
+                    ratdoodle.setAttribute('transform','translate('+newX+','+firstY+') '+'scale('+(-scaleint).toString()+','+(scaleint).toString()+') ');
                     isFromge()
                 }
                 break;
@@ -746,6 +753,7 @@ function move_rat(){
                 return; // Quit when this doesn't handle the key event.
             }
         }
+
         event.preventDefault();
     }, true);
     
@@ -759,8 +767,9 @@ function isFromge(){
     var Ratpos  = /translate\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
     var ratX = parseFloat(Ratpos[1]);
     var ratY = parseFloat(Ratpos[2]);
-    var scale = /scale\(\s*([^\s,)]+)\)/.exec(xforms);
-    var donaSize = parseFloat(scale[1])
+    var scale = /scale\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
+    var donaSize = parseFloat(scale[2])
+    var signDona = parseFloat(scale[1])/donaSize
 
     fromage = document.getElementById('Fromage')
     var xforms = fromage.getAttribute('transform');
@@ -771,9 +780,9 @@ function isFromge(){
 
     if(cheeseX-50*donaSize <  ratX && cheeseX+50*donaSize > ratX
         && cheeseY-50*donaSize < ratY && cheeseY+50*donaSize > ratY){
-            if (donaSize+0.2 < 2.2){ 
+            if (donaSize+0.5 < 3){ 
             
-                ratdoodle.setAttribute('transform',Ratpos[0]+') scale('+(donaSize+0.2).toString()+')');
+                ratdoodle.setAttribute('transform',Ratpos[0]+') '+'scale('+(signDona*(donaSize+0.5)).toString()+','+(donaSize+0.5).toString()+') ');
     
                 var newX = (30+Math.floor(Math.random() * 1700)).toString();
                 var newY = (30+Math.floor(Math.random() * 800)).toString();
@@ -816,11 +825,11 @@ function eatTheMouse(){
     var Ratpos  = /translate\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
     var ratX = parseFloat(Ratpos[1]);
     var ratY = parseFloat(Ratpos[2]);
-    var scale = /scale\(\s*([^\s,)]+)\)/.exec(xforms);
-    var scaleint = parseFloat(scale[1])
+    var scale = /scale\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
+    var scaleint = parseFloat(scale[2])
 
-    return (BADratX-50*scaleint <  ratX && BADratX+50*scaleint > ratX
-        && BADratY-50*scaleint < ratY && BADratY+50*scaleint > ratY)
+    return (BADratX <  ratX && BADratX+150 > ratX
+        && BADratY < ratY && BADratY+30 > ratY)
 }
     
 
@@ -828,8 +837,15 @@ function meanRatMove(){
 
     bad_rat_move = setInterval(async function () {
 
+        if (document.getElementById('textloose').style.opacity==1){
+            badratdoodle = document.getElementById('badrat');
+            badratdoodle.setAttribute('transform','translate(500 200)  scale(8)');
+            clearInterval(bad_rat_move);
+        }
         if (document.getElementById('Award').style.opacity==0){
             if (eatTheMouse()==true){
+                document.getElementById('ratdoodle').style.opacity=0;
+                document.getElementById('Fromage').style.opacity=0;    
                 badratdoodle = document.getElementById('badrat')
                 badratdoodle.setAttribute('transform','translate(500 200)  scale(8)');
                 document.getElementById('textloose').style.opacity=1;
@@ -843,7 +859,11 @@ function meanRatMove(){
                 var ratY = parseFloat(Ratpos[2]);
                 var newX = (parseFloat(ratX) +1).toString();
                 var newY = (parseFloat(ratY)).toString();
-
+                
+                if (document.getElementById('badradbody').getAttribute('d')==d1){
+                    document.getElementById('badradbody').setAttribute('d',d2)
+                }else{document.getElementById('badradbody').setAttribute('d',d1)}
+                
                 if (parseFloat(ratX) - rat_speed  <= 0){
                     var newY = (Math.floor(Math.random() * 750)).toString();
                     var newX = (1800).toString();
@@ -853,11 +873,13 @@ function meanRatMove(){
                 }
                 badratdoodle.setAttribute('transform','translate('+newX+','+newY+')  scale(2)');
 
-            }
+            };
         }else{
-            badratdoodle = document.getElementById('badrat').style.opacity=0;
-            badratdoodle = document.getElementById('Fromage').style.opacity=0;
-            clearInterval(bad_rat_move);}
+            document.getElementById('badrat').style.opacity=0;
+            document.getElementById('Fromage').style.opacity=0;
+            clearInterval(bad_rat_move);
+        }
+
     }, 1);
 
 }
