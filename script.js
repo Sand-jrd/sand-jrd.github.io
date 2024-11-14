@@ -796,6 +796,7 @@ function isFromge(){
                 document.getElementById('textaward').setAttribute('transform','translate(20 40)');
                 document.getElementById('heartaward').setAttribute('transform','translate(20 40)');
                 document.getElementById('Award').style.opacity=1;
+                rainRat()
             }
 
     }
@@ -805,13 +806,13 @@ function isFromge(){
 
 async function gameStart(){
     var divout = document.getElementById('gamecanbehere')
-
+    
     await fetch("pages/gameRat.html")
     .then(response=> response.text())
     .then(text=> divout.innerHTML = text)
     .then(move_rat())
-    .then(meanRatMove());
-
+    .then(meanRatMove())
+    .then(setrainRat)
 }
 
 function eatTheMouse(){
@@ -844,6 +845,7 @@ function meanRatMove(){
         }
         if (document.getElementById('Award').style.opacity==0){
             if (eatTheMouse()==true){
+                stalkerrat();
                 document.getElementById('ratdoodle').style.opacity=0;
                 document.getElementById('Fromage').style.opacity=0;    
                 badratdoodle = document.getElementById('badrat')
@@ -884,3 +886,49 @@ function meanRatMove(){
 
 }
 
+function setrainRat(){
+    var containRat = document.getElementById('rainrat')
+    var ori_rat = document.getElementById('originalrat')
+
+    var newColor = ["#ffffff","#868d90","#868d90","#ffffff","#000000"]
+    var newFur = ["#ffffff","#ffffff","#868d90","#ffffff","#000000"]
+    var neweye = ["#ff0000","#000000","#000000","#ff0000","#ff0000"]
+
+    for (let index = 0; index < newColor.length; index++) {
+        const clone = ori_rat.cloneNode(true);
+        clone.style.left = (Math.floor(Math.random() * 100)).toString()+"%"
+        clone.getElementById('happyratbody').style.fill = newColor[index]
+        clone.getElementById('happyrateye').style.fill = neweye[index]
+        clone.getElementById('happyratbelly').style.fill = newFur[index]
+        clone.style.top = (Math.floor(Math.random() * 100)).toString()+"%"
+        if(newColor[index]=="#000000"){
+            clone.getElementById('mouth').style.stroke = "#ffffff"
+        }
+        containRat.appendChild(clone);
+    }
+}
+
+function rainRat(){
+    var elem = document.getElementsByClassName('happyrat')
+    for (let i = 0; i < elem.length; i++) {
+        elem[i].style.opacity=1;
+        elem[i].style.transition = "top 20s"
+        elem[i].style.top = "100%"
+        elem[i].style.left = (Math.floor(Math.random() * 100)).toString()+"%"
+    }
+}
+
+
+function stalkerrat(){
+    window.addEventListener("mousemove", function (event) {
+
+        var ori_rat = document.getElementById('ratstaler')
+
+        ori_rat.style.opacity=1;
+        ori_rat.style.position="absolute";
+
+        ori_rat.style.top = (event.clientY).toString()+"px"
+        ori_rat.style.left = (event.clientX).toString()+"px"
+
+    })
+}

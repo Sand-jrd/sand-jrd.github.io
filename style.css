@@ -671,6 +671,41 @@ opacity: 1;
     }
 
 
-.cp-img-activate{
+    
 
+.happyrat{
+    position: absolute;
+    transition: top 20s ease 20s;
+    transition: left 20s ease 20s;
+    -webkit-animation: 4s linear 0s infinite alternate move-rat;
+    animation: 4s linear 0s infinite alternate move-rat;
+  
 }
+#ratstaler{
+    position: absolute;
+    transition: all 1s;
+    top:50%;
+    left: 50%;
+}
+
+@randomleft: `Math.round(Math.random() * 100)`;
+
+@-webkit-keyframes move-rat {
+    from {
+        top:0%;
+    }
+    to {
+        top:100%;
+        left: '@{randomleft}';
+    }
+  }
+  @keyframes move-rat {
+    from {
+        top:0%;
+    }
+    to {
+        top:100%;
+        left: '@{randomleft}';
+    }
+  }
+  
