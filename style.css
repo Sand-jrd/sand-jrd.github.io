@@ -585,6 +585,12 @@ width: fit-content;
     width: 99%;
     height: 39px;
     box-shadow: 0px 0px 5px rgba(0,0,0,0.9);
+    display: flex;
+    flex-wrap: wrap;
+
+}
+#map_bottoms input{
+display: flex;
 }
 
 .map_elem{
