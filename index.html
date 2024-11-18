@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <!-- saved from url=(0027)https://sand-jrd.github.io/ -->
-<html data-lt-installed="true"><head>
+<html lang="en" data-lt-installed="true"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="style.css">
-<script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://www.ajaxproxy.com/js/ajaxproxy.js"></script>
-<link href='https://fonts.googleapis.com/css?family=Lexend' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Lexend&display=swap' rel='stylesheet'>
 <title>Sandrine Juillard's Personal Website</title>
 <meta name="description" content="Sandrine Juillard, PhD student at ULiège, researching high-contrast imaging in astronomy with a focus on protoplanetary disks and exoplanet detection.">
 <meta name="google-site-verification" content="BO-e33JGui0-43SVygJvZ7CJ2sSsxCdTNicA_8xRVBQ" />
@@ -22,15 +21,90 @@
         <a class="unactive" id="publi" onClick="gotopage('publi');">Publications</a>
         <a class="unactive" id="code" onClick="gotopage('code');">Code</a>
         <a class="unactive" id="com" onClick="gotopage('com');">Communications</a>
-        <a href="https://github.com/Sand-jrd"> Sand-jrd <img id="gimg" src="github-mark.png">
+        <a href="https://github.com/Sand-jrd"> Sand-jrd <img id="gimg" alt="github cat" src="github-mark.png">
         </a>
 </div>
 </div>
-
 <div id="currentpage">
-    
-I am Sandrine Juillard, a PhD student at the University of Liège (Belgium), conducting research in the field of signal processing applied to high-contrast imaging in the field of astronomy.    
+        <p style="opacity: 0;">Sandrine asto astronomy exoplanet PDS-70 mustard greeds</p>
 
+        <!DOCTYPE html>
+        <!-- saved from url=(0027)https://sand-jrd.github.io/ -->
+        <html data-lt-installed="true"><head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="../style.css">
+        <meta name="generator" content={Astro.generator} >
+        
+        </head>
+        
+        <div id="into" class="page">
+        <h2 id="About me" class="sec" style="
+            color: #005fb2; 
+        ">About me</h2>
+        <hr class="rounded" style="
+            background-color: #005fb2">
+        
+        <div id="prez" >
+            <div id="gamecanbehere"></div>
+        <div class="textimg">
+            <div><p>
+                My name is <a class="inlinelink" href="https://www.uliege.be/cms/c_9054334/fr/repertoire?uid=u238055">Sandrine Juillard</a>, and I am currently pursuing my PhD at the University of Liège - in <a class="inlinelink" href="https://www.psilab.uliege.be/cms/c_9965343/en/psilab">The Planetary & Stellar system Imaging Laboratory (PSILab)</a> - under the supervision of <a class="inlinelink" href="https://sites.google.com/view/valentinchristiaens/home">Valentin Christiaens</a> and <a class="inlinelink" href="https://www.psilab.uliege.be/cms/c_9967806/en/psilab-olivier-absil">Olivier Absil</a>. 
+            </br></br>I am conducting research in the field of signal processing applied to high-contrast imaging. <spam class="text-highlight_blue">I recommend using Iterative Principal Component Analysis (I-PCA), also known as GreeDS, for processing ADI/RDI infrared scattered-light HCI datasets (e.g VLT/SHPERE/IRDIS, KECK/NIRC).</spam><a href="https://ui.adsabs.harvard.edu/abs/2023A&A...679A..52J/abstract"> Why? see Juillard et. al 2023.</a> 
+        </br>You can install my implementation of <code>GreeDS</code>, which is fast, simple, and requires <code>PyTorch</code>. See the instructions below or in the "code" section.
+        </br></br>Currently, in my final year, I started a new project in collaboration with Yannis Argyriou and Danny Gasman (KU Leuven, Belgium), focused on PSF-subtraction for the JWST/MIRI-MRS instrument. 
+        </br></br>As I approach the completion of my Ph.D. in September 2025, I am actively seeking to pursue a career in space science.
+            </p></div>
+            <div>
+                <div>
+                <img alt="pet picture"  src="rat.jpg" onclick="gameStart()" style=" max-width: 300px; box-shadow: 0px 0px 5px rgba(0,0,0,0.9);">
+            </div>
+            </div>
+        </div>
+        
+        
+        
+        <h2 id="About me" class="sec" style="
+            color: #005fb2; 
+        ">Iterative PCA</h2>
+        <hr class="rounded" style="
+            background-color: #005fb2">
+        
+        <p>Download IPCA via <a class="inlinelink" href="https://pypi.org/project/GreeDS/">PyPI</a>:</p>
+        
+        <div class="inlinecode">
+        pip install GreeDS <button onclick="copypipinstall()"><img alt="copy icon" id="cp-pip" src="../cp.png" title="Copy Text to Clipboard" style="width: 15px;"></button>
+        </div>
+        
+        <p>Exemple usage</p>
+        
+        <pre>
+            <div class="codetitle">Import package and load data</code><button title="Copy Text to Clipboard"  class="inblock" onclick="copyimport()"><img alt="copy icon" id="cp-import"  src="../cp.png" style="width: 30px;"></button></div>
+        <code> <span class="keyword">from</span>  <span class="function">GreeDS</span> <span class="keyword">import</span>  <span class="function">GreeDS</span>
+          <span class="keyword">from</span>  <span class="function">vip_hci.fits</span> <span class="keyword">import</span>  <span class="function">open_fits</span>
+        
+          <span class="variable">cube</span> = <span class="function">open_fits</span>( <span class="string">"your_cube.fits"</span>)</span>
+          <span class="variable">angles</span> = <span class="function">open_fits</span>( <span class="string">"your_PA_angles.fits"</span>)</span>
+          <span class="variable">ref</span> = <span class="function">open_fits</span>( <span class="string">"your_refs.fits"</span>)</span></code></pre>
+        
+         <pre>    <div class="codetitle">Use IPCA<button class="inblock" title="Copy Text to Clipboard" onclick="copygreeds()"><img alt="copy icon" id="cp-greeds" src="../cp.png" style="width: 30px;"></button></div>
+        <code> <span class="variable">r</span> = <span class="number">10</span> <span class="comment"># Iteration over PCA-rank</span>
+          <span class="variable">l</span> = <span class="number">10</span> <span class="comment"># Iteration per rank</span>
+          <span class="variable">r_start</span> = <span class="number">1</span> <span class="comment"># PCA-rank to start iteration (good for faint signals)</span>
+          <span class="variable">pup_size</span> = <span class="number">3</span> <span class="comment"># Radius of numerical mask to hide coro</span>
+        
+          <span class="variable">res</span> = <span class="function">GreeDS</span>(<span class="variable">cube</span>, <span class="variable">angles</span>, <span class="keyword">r</span>=<span class="variable">r</span>, <span class="keyword">l</span>=<span class="variable">l</span>, <span class="keyword">r_start</span>=<span class="variable">r_start</span>, <span class="keyword">pup_size</span>=<span class="variable">pup_size</span>) </code></pre>
+            
+        
+        
+        <hr style="
+            border: 1px solid #ffffff00;
+            margin-bottom: 40px;
+            margin-top: 40px;
+            width: 100%;
+            box-shadow: 0px 12px 2px #b8b1b1;
+            margin-left: -3%;
+        ">
 </div>
 
 </body></html>
