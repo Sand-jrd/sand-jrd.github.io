@@ -713,3 +713,31 @@ opacity: 1;
     }
   }
   
+#pressenter{
+    transition: opacity 1s ease 1s;
+    -webkit-animation: 1s linear 1s infinite alternate clignoter;
+    animation: 1s linear 1s infinite alternate clignoter;
+  
+}
+
+  @-webkit-keyframes clignoter {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+  }
+  @keyframes clignoter {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+  }
+
+#human_talk{
+    width: 10px;
+  text-wrap: pretty;
+}
