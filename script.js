@@ -232,9 +232,6 @@ const button = document.getElementById('currentpage');
         loadpub();
         autoScroll();
     }
-    if (link == "into"){
-        add_markdown ()
-    }
 
     if (link == "com"){
         setMap()
@@ -278,9 +275,6 @@ const button = document.getElementById('currentpage');
     if (link == "publi"){
         loadpub();
         autoScroll();
-    }
-    if (link == "into"){
-        add_markdown ()
     }
 
     if (link == "com"){
@@ -333,13 +327,6 @@ function autoScroll () {
 
 };
 
- 
-function add_markdown () {
-    const converter = new showdown.Converter(); 
-    fetch("greeds.md")
-    .then(response=> response.text())
-    .then(text=> document.getElementById("markdown-output").innerHTML = converter.makeHtml(text));
-};
  
 function copypipinstall ()  {
     navigator.clipboard.writeText("pip install GreeDS");
@@ -769,6 +756,12 @@ function ratwalk(doTheWalk){
         
 }
 
+var block_y=false;
+function block_rat_in_y(block_or_not){
+    block_y=block_or_not;
+    return;
+}
+
 function move_rat(){
 
     window.addEventListener("keydown", function (event) {
@@ -779,38 +772,35 @@ function move_rat(){
         else{    
             switch (event.key) {
             case "ArrowDown":
-                if (rat_goes_down==null){    
+                if (rat_goes_down==null && block_y==false){    
                 rat_goes_down = setInterval(function(){
                     
                     ratdoodle = document.getElementById('ratdoodle')
                     var xforms = ratdoodle.getAttribute('transform');
-                    var parts  = /translate\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
-                    var firstX = parts[1];
-                    var firstY = parts[2];
-                    var scale = /scale\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
-                    var scaleint = parseFloat(scale[2])
-            
+                    var parts  =/matrix\(\s*([^\s,)]+)[ ,]([^\s,)]+)[ ,]([^\s,)]+)[ ,]([^\s,)]+)[ ,]([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
+                    var firstX = parts[5];
+                    var firstY = parts[6];
+                    var scaleint = parseFloat(parts[4])
+
                     var newY = (parseFloat(firstY) + 3*rat_speed_normalize).toString();
                     if (parseFloat(firstY) + 30 <= 867-10*scaleint){
-                        ratdoodle.setAttribute('transform','translate('+firstX+','+newY+') '+scale[0]+")");
+                        ratdoodle.setAttribute('transform','matrix('+parts[1]+",0,0,"+parts[4]+','+firstX+','+newY+')');
                         isFromge()
                     }
                 }, 20);}
                 break;
             case "ArrowUp":
-                if (rat_goes_up==null){
+                if (rat_goes_up==null && block_y==false){
                 rat_goes_up = setInterval(function(){
                     ratdoodle = document.getElementById('ratdoodle')
                     var xforms = ratdoodle.getAttribute('transform');
-                    var parts  = /translate\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
-                    var firstX = parts[1];
-                    var firstY = parts[2];
-                    var scale = /scale\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
-                    var scaleint = parseFloat(scale[2])
+                    var parts  =/matrix\(\s*([^\s,)]+)[ ,]([^\s,)]+)[ ,]([^\s,)]+)[ ,]([^\s,)]+)[ ,]([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
+                    var firstX = parts[5];
+                    var firstY = parts[6];
                 
                     var newY = (parseFloat(firstY) - 3*rat_speed_normalize).toString();
                     if (parseFloat(firstY) - 30 >= 0){
-                        ratdoodle.setAttribute('transform','translate('+firstX+','+newY+') '+scale[0]+")");
+                        ratdoodle.setAttribute('transform','matrix('+parts[1]+",0,0,"+parts[4]+','+firstX+','+newY+')');
                         isFromge()
                         }
                 }, 20);}
@@ -820,16 +810,16 @@ function move_rat(){
                 rat_goes_left = setInterval(function(){
                     ratdoodle = document.getElementById('ratdoodle')
                     var xforms = ratdoodle.getAttribute('transform');
-                    var parts  = /translate\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
-                    var firstX = parts[1];
-                    var firstY = parts[2];
-                    var scale = /scale\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
-                    var scaleint = parseFloat(scale[2])
+                    var parts  =/matrix\(\s*([^\s,)]+)[ ,]([^\s,)]+)[ ,]([^\s,)]+)[ ,]([^\s,)]+)[ ,]([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
+                    var firstX = parts[5];
+                    var firstY = parts[6];
+                    var scaleint = parseFloat(parts[4])
                 
                     var newX = (parseFloat(firstX) - 3*rat_speed_normalize).toString();
                     if (parseFloat(firstX) - 30  >= 0){
-                        if(scale[1]<0){(newX=parseFloat(newX)-60*scaleint).toString()}
-                        ratdoodle.setAttribute('transform','translate('+newX+','+firstY+') '+'scale('+(scaleint).toString()+','+(scaleint).toString()+') ');
+                        if(parseFloat(parts[1])<0){(newX=parseFloat(newX)-60*scaleint).toString()}
+                        ratdoodle.setAttribute('transform','matrix('+(scaleint).toString()+",0,0,"+parts[4]+','+newX+','+firstY+')');
+
                         isFromge()
                     }
                 }, 20);}
@@ -839,16 +829,16 @@ function move_rat(){
                 rat_goes_right = setInterval(function(){
                     ratdoodle = document.getElementById('ratdoodle')
                     var xforms = ratdoodle.getAttribute('transform');
-                    var parts  = /translate\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
-                    var firstX = parts[1];
-                    var firstY = parts[2];
-                    var scale = /scale\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
-                    var scaleint = parseFloat(scale[2])
+                    var parts  =/matrix\(\s*([^\s,)]+)[ ,]([^\s,)]+)[ ,]([^\s,)]+)[ ,]([^\s,)]+)[ ,]([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
+                    var firstX = parts[5];
+                    var firstY = parts[6];
+                    var scaleint = parseFloat(parts[4])
                 
                     var newX = (parseFloat(firstX) + 3*rat_speed_normalize).toString();
                     if (parseFloat(firstX) + 30  <= 1800-30*scaleint){
-                        if(scale[1]>0){(newX=parseFloat(newX)+60*scaleint).toString()}
-                        ratdoodle.setAttribute('transform','translate('+newX+','+firstY+') '+'scale('+(-scaleint).toString()+','+(scaleint).toString()+') ');
+                        if(parseFloat(parts[1])>0){(newX=parseFloat(newX)+60*scaleint).toString()}
+                        ratdoodle.setAttribute('transform','matrix('+(-scaleint).toString()+",0,0,"+parts[4]+','+newX+','+firstY+')');
+
                         isFromge()
                     }
                 }, 20);}
@@ -902,20 +892,17 @@ function move_rat(){
 
 function isFromge(){
 
+    if(block_y==true){return;}
+
     ratdoodle = document.getElementById('ratdoodle')
     var xforms = ratdoodle.getAttribute('transform');
-    var Ratpos  = /translate\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
-    var ratX = parseFloat(Ratpos[1]);
-    var ratY = parseFloat(Ratpos[2]);
-    var scale = /scale\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
-    var donaSize = parseFloat(scale[2])
-    var signDona = parseFloat(scale[1])/donaSize
+    var Ratpos  = /matrix\(\s*([^\s,)]+)[ ,]([^\s,)]+)[ ,]([^\s,)]+)[ ,]([^\s,)]+)[ ,]([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
+    var donaSize = parseFloat(Ratpos[4])
+    var signDona = parseFloat(Ratpos[1])/donaSize
 
     fromage = document.getElementById('Fromage')
     var xforms = fromage.getAttribute('transform');
     var parts  = /translate\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
-    var cheeseX = parseFloat(parts[1]);
-    var cheeseY = parseFloat(parts[2]);
     var scaleFromage = /scale\(\s*([^\s,)]+)\)/.exec(xforms);
 
     var cheese_pos = document.getElementById('Fromage').getBoundingClientRect()
@@ -925,8 +912,8 @@ function isFromge(){
         && goodrat_pos.left < cheese_pos.width+cheese_pos.left && goodrat_pos.x > cheese_pos.left-goodrat_pos.width){
             if (donaSize+0.5 < 3){ 
             
-                ratdoodle.setAttribute('transform',Ratpos[0]+') '+'scale('+(signDona*(donaSize+0.5)).toString()+','+(donaSize+0.5).toString()+') ');
-    
+                ratdoodle.setAttribute('transform','matrix('+(signDona*(donaSize+0.5)).toString()+",0,0,"+(donaSize+0.5).toString()+','+Ratpos[5]+','+Ratpos[6]+')');
+
                 var newX = (30+Math.floor(Math.random() * 1700)).toString();
                 var newY = (30+Math.floor(Math.random() * 800)).toString();
                 fromage.setAttribute('transform','translate('+newX+','+newY+') '+scaleFromage[0]);
@@ -1034,7 +1021,7 @@ function meanRatMove(){
                     var parts  = /translate\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
                     var cheeseY = parseFloat(parts[2]);
     
-                    var newY = (cheeseY + 100 - Math.floor(Math.random() * 200 )).toString();
+                    var newY = (cheeseY + 200 - Math.floor(Math.random() * 400 )).toString();
                     var newX = (1800).toString();
 
                 }else{
