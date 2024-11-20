@@ -1047,11 +1047,10 @@ function setrainRat(){
 
     for (let index = 0; index < newColor.length; index++) {
         const clone = ori_rat.cloneNode(true);
-        clone.style.left = (Math.floor(Math.random() * 100)).toString()+"%"
+        clone.style.left = (Math.floor(Math.random() * 80)).toString()+"%"
         clone.getElementById('happyratbody').style.fill = newColor[index]
         clone.getElementById('happyrateye').style.fill = neweye[index]
         clone.getElementById('happyratbelly').style.fill = newFur[index]
-        clone.style.top = (Math.floor(Math.random() * 100)).toString()+"%"
         if(newColor[index]=="#000000"){
             clone.getElementById('mouth').style.stroke = "#ffffff"
         }
