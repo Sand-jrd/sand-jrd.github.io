@@ -683,6 +683,10 @@ opacity: 1;
     transition: left 20s ease 20s;
     -webkit-animation: 4s linear 0s infinite alternate move-rat;
     animation: 4s linear 0s infinite alternate move-rat;
+    -webkit-animation-play-state:paused;
+    -moz-animation-play-state:paused;
+    -o-animation-play-state:paused; 
+    animation-play-state:paused;
   
 }
 #ratstaler{

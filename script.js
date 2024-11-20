@@ -704,10 +704,6 @@ function setHeight() {
 
 }
 
-window.addEventListener('resize', setHeight);
-
-
-
 function change_botton_visibility(active){
     if(active==true){
         opacity = 0.5
@@ -728,7 +724,7 @@ function change_botton_visibility(active){
 
 
 
-var rat_speed = 4
+var rat_speed = 3
 var gameover = true;
 var d1= "m1.02277,26.50293c0,0 -1.5634,-2.22473 0.62535,-3.19199c2.18875,-0.96724 9.38033,-9.72102 15.00849,-9.86611c0,0 0.31267,-8.70538 4.37747,-7.2545c4.06483,1.45092 2.18875,2.61161 2.18875,2.61161c0,0 6.8789,-7.54466 8.75498,0.87054c0,0 1.87605,2.17636 9.06762,-4.0625c7.19157,-6.23886 31.87538,-7.72169 43.77482,3.77234c7.66057,7.39959 18.29159,18.42643 10.00564,28.43763c0,0 4.79652,21.99093 -35.2816,18.68855c0,0 -15.52844,-2.72867 -23.50168,-2.43848c-7.97327,0.29016 -14.5395,2.75671 -10.63102,-0.58038c3.90844,-3.33706 14.38315,-3.33706 28.45362,-0.87054c14.07047,2.46655 36.58321,2.03127 36.58321,-12.76791c0,0 -3.43945,1.16073 -5.00282,0.29019c0,0 0.78167,3.19196 -3.75212,2.9018c-4.53383,-0.29019 -0.4981,2.46693 -5.18824,4.35307c0,0 -1.40705,0.87057 -1.87608,0c0,0 -2.34507,0 -1.56337,-0.87054c0,0 -1.32887,-0.50782 0,-1.45089c1.32887,-0.94307 2.37414,-4.86092 2.06147,-4.93345c-0.31267,-0.07253 0.15632,-0.94307 -0.62535,-0.87054c-0.7817,0.07253 -23.91982,1.37835 -30.01702,-0.29019c0,0 -0.31267,1.95873 -1.56337,1.16073c0,0 5.33787,3.44728 2.83648,4.68054c-2.50143,1.23329 -1.64158,0.29019 -2.50143,0.58038c-0.85988,0.29016 -1.7979,1.66851 -2.8141,0.87054c0,0 -3.43945,0.79798 -2.50143,-0.58038c0,0 -1.09434,0.36275 -1.56337,-0.58035c0,0 -1.48523,-0.43525 0.62535,-2.03127c2.11058,-1.59598 -6.27593,-3.88253 -5.65058,-4.68054c0.62538,-0.79801 0.39085,-1.37835 -1.56337,-1.16073c-1.95422,0.21763 -5.94088,-0.43525 -9.06765,-2.32143c-3.12678,-1.88617 -2.11492,-2.82408 -8.75494,-3.48218c-5.36761,-0.53198 -6.46199,-1.25743 -7.81692,-1.74108c-1.35497,-0.48362 -3.12678,-3.19196 -3.12678,-3.19196l-0.00001,0.00002z"
 var d2 ="m1.15383,26.50293c0,0 -1.5634,-2.22473 0.62535,-3.19199c2.18875,-0.96724 9.38033,-9.72102 15.00849,-9.86611c0,0 0.31267,-8.70538 4.37747,-7.2545c4.06483,1.45092 2.18875,2.61161 2.18875,2.61161c0,0 6.8789,-7.54466 8.75498,0.87054c0,0 1.87605,2.17636 9.06762,-4.0625c7.19157,-6.23886 31.87538,-7.72169 43.77482,3.77234c7.66057,7.39959 18.29159,18.42643 10.00564,28.43763c0,0 4.79652,21.99093 -35.2816,18.68855c0,0 -15.52844,-2.72867 -23.50168,-2.43848c-7.97327,0.29016 -14.5395,2.75671 -10.63102,-0.58038c3.90844,-3.33706 14.38315,-3.33706 28.45362,-0.87054c14.07047,2.46655 36.58321,2.03127 36.58321,-12.76791c0,0 -3.43945,1.16073 -5.00282,0.29019c0,0 0.78167,3.19196 -3.75212,2.9018c-4.53383,-0.29019 -8.75498,-1.59598 -13.44512,0.29016c0,0 -1.40705,0.87057 -1.87608,0c0,0 -2.34507,0 -1.56337,-0.87054c0,0 -1.32887,-0.50782 0,-1.45089c1.32887,-0.94307 10.63102,-0.79801 10.31835,-0.87054c-0.31267,-0.07253 0.15632,-0.94307 -0.62535,-0.87054c-0.7817,0.07253 -23.91982,1.37835 -30.01702,-0.29019c0,0 -0.31267,1.95873 -1.56337,1.16073c0,0 -11.56908,1.08817 -14.07047,2.32143c-2.50143,1.23329 -1.64158,0.29019 -2.50143,0.58038c-0.85988,0.29016 -1.7979,1.66851 -2.8141,0.87054c0,0 -3.43945,0.79798 -2.50143,-0.58038c0,0 -1.09434,0.36275 -1.56337,-0.58035c0,0 -1.48523,-0.43525 0.62535,-2.03127c2.11058,-1.59598 10.63102,-1.52342 11.25637,-2.32143c0.62538,-0.79801 0.39085,-1.37835 -1.56337,-1.16073c-1.95422,0.21763 -5.94088,-0.43525 -9.06765,-2.32143c-3.12678,-1.88617 -2.11492,-2.82408 -8.75494,-3.48218c-5.36761,-0.53198 -6.46199,-1.25743 -7.81692,-1.74108c-1.35497,-0.48362 -3.12678,-3.19196 -3.12678,-3.19196z"
@@ -739,6 +735,9 @@ var rat_goes_up = null;
 var rat_goes_down = null;
 var rat_goes_left = null;
 var rat_goes_right = null;
+
+var game_mod =null;
+game_is_running = false
 
 var  rat_walk = null;
 function ratwalk(doTheWalk){
@@ -762,9 +761,8 @@ function block_rat_in_y(block_or_not){
     return;
 }
 
-function move_rat(){
+function move_rat(event){
 
-    window.addEventListener("keydown", function (event) {
         if (event.defaultPrevented) {
           return; // Do nothing if the event was already processed
         }
@@ -853,42 +851,40 @@ function move_rat(){
             }
 
         event.preventDefault();
-    }, true);
-
-    window.addEventListener("keyup", function (event) {
-        if (event.defaultPrevented) {
-          return; // Do nothing if the event was already processed
-        }
-        switch (event.key) {
-            case "ArrowDown":
-                clearInterval(rat_goes_down)
-                rat_goes_down=null;
-                break;
-            case "ArrowUp":
-                clearInterval(rat_goes_up)
-                rat_goes_up=null;
-                break;
-            case "ArrowLeft":
-                clearInterval(rat_goes_left)
-                rat_goes_left=null;        
-                break;
-            case "ArrowRight":
-                clearInterval(rat_goes_right)
-                rat_goes_right=null;
-                break;
-            default:
-                return; // Quit when this doesn't handle the key event.
-        }
-        isStillWalking = rat_goes_right!=null || rat_goes_left!=null || rat_goes_up!=null || rat_goes_down!=null
-        if(isStillWalking==false){ratwalk(isStillWalking)}
-        how_much = (rat_goes_right!=null || rat_goes_left!=null) && (rat_goes_up!=null || rat_goes_down!=null)
-        rat_speed_normalize=1.41-0.41*(how_much)
-        event.preventDefault(); 
-    }, true);
-
-    
 }
 
+function rat_stop_moving(event) {
+    if (event.defaultPrevented) {
+        return; // Do nothing if the event was already processed
+    }
+    switch (event.key) {
+        case "ArrowDown":
+            clearInterval(rat_goes_down)
+            rat_goes_down=null;
+            break;
+        case "ArrowUp":
+            clearInterval(rat_goes_up)
+            rat_goes_up=null;
+            break;
+        case "ArrowLeft":
+            clearInterval(rat_goes_left)
+            rat_goes_left=null;        
+            break;
+        case "ArrowRight":
+            clearInterval(rat_goes_right)
+            rat_goes_right=null;
+            break;
+        default:
+            return; // Quit when this doesn't handle the key event.
+    }
+    isStillWalking = rat_goes_right!=null || rat_goes_left!=null || rat_goes_up!=null || rat_goes_down!=null
+    if(isStillWalking==false){ratwalk(isStillWalking)}
+    how_much = (rat_goes_right!=null || rat_goes_left!=null) && (rat_goes_up!=null || rat_goes_down!=null)
+    rat_speed_normalize=1.41-0.41*(how_much)
+    event.preventDefault(); 
+}
+
+    
 
 function isFromge(){
 
@@ -910,23 +906,23 @@ function isFromge(){
 
     if(goodrat_pos.top < cheese_pos.top+cheese_pos.height && goodrat_pos.top > cheese_pos.top-goodrat_pos.height
         && goodrat_pos.left < cheese_pos.width+cheese_pos.left && goodrat_pos.x > cheese_pos.left-goodrat_pos.width){
-            if (donaSize+0.5 < 3){ 
+            if (donaSize+0.5 < 1.2){ 
             
                 ratdoodle.setAttribute('transform','matrix('+(signDona*(donaSize+0.5)).toString()+",0,0,"+(donaSize+0.5).toString()+','+Ratpos[5]+','+Ratpos[6]+')');
-
                 var newX = (30+Math.floor(Math.random() * 1700)).toString();
                 var newY = (30+Math.floor(Math.random() * 800)).toString();
                 fromage.setAttribute('transform','translate('+newX+','+newY+') '+scaleFromage[0]);
                 rat_speed = rat_speed+0.3
             } 
             else{
-                gameover = true;
-                document.getElementById('ratdoodle').setAttribute('transform','translate(400 200) scale(8)');
-                document.getElementById('Fromage').setAttribute('transform','translate(200 100) scale(5)');
-                document.getElementById('textaward').setAttribute('transform','translate(20 40)');
-                document.getElementById('heartaward').setAttribute('transform','translate(20 40)');
-                document.getElementById('Award').style.opacity=1;
-                rainRat()
+                if(document.getElementById('ratstaler').style.opacity==0){
+                    gameover = true;
+                    document.getElementById('Fromage').setAttribute('transform','translate(-1000 -100) scale(0)');
+                    document.getElementById('badrat').style.opacity=0;
+                    document.getElementById('Fromage').style.opacity=0;
+                    clearInterval(bad_rat_move);    
+                    game_mod.start_outro_screen()
+                }
             }
 
     }
@@ -934,7 +930,7 @@ function isFromge(){
 
 }
 
-game_is_running = false
+
 async function gameStart(){
 
     if(game_is_running==false){
@@ -944,19 +940,20 @@ async function gameStart(){
         let head = document.getElementsByTagName('head')[0];
         let script2 = document.createElement('script');
         script2.src = "https://unpkg.com/gsap@3/dist/MotionPathPlugin.min.js";
-        script2.onload = () => leftToLoad--; 
+        script2.onload = () => 1; 
         head.append(script2);
 
         let script = document.createElement('script');
         script.src = "https://unpkg.co/gsap@3/dist/gsap.min.js";
-        script.onload = () => leftToLoad--; 
+        script.onload = () => 1; 
         head.append(script);
-
 
         await fetch("pages/gameRat.html")
         .then(response=> response.text())
         .then(text=> divout.innerHTML = text)
-        .then(import("./script_game.js"));
+
+        game_mod = await import("./script_game.js")
+        game_mod.start_intro_screen()
         document.getElementById('ratdoodle').style.opacity = 0;
         document.getElementById('badrat').style.opacity = 0;
         document.getElementById('Fromage').style.opacity = 0;
@@ -1059,19 +1056,9 @@ function setrainRat(){
             clone.getElementById('mouth').style.stroke = "#ffffff"
         }
         containRat.appendChild(clone);
+        
     }
 }
-
-function rainRat(){
-    var elem = document.getElementsByClassName('happyrat')
-    for (let i = 0; i < elem.length; i++) {
-        elem[i].style.opacity=1;
-        elem[i].style.transition = "top 20s"
-        elem[i].style.top = "100%"
-        elem[i].style.left = (Math.floor(Math.random() * 100)).toString()+"%"
-    }
-}
-
 
 function stalkerrat(){
     window.addEventListener("mousemove", function (event) {
