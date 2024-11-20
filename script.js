@@ -906,7 +906,7 @@ function isFromge(){
 
     if(goodrat_pos.top < cheese_pos.top+cheese_pos.height && goodrat_pos.top > cheese_pos.top-goodrat_pos.height
         && goodrat_pos.left < cheese_pos.width+cheese_pos.left && goodrat_pos.x > cheese_pos.left-goodrat_pos.width){
-            if (donaSize+0.5 < 1.2){ 
+            if (donaSize+0.5 < 3){ 
             
                 ratdoodle.setAttribute('transform','matrix('+(signDona*(donaSize+0.5)).toString()+",0,0,"+(donaSize+0.5).toString()+','+Ratpos[5]+','+Ratpos[6]+')');
                 var newX = (30+Math.floor(Math.random() * 1700)).toString();
