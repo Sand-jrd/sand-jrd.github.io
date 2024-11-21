@@ -212,7 +212,7 @@ function rainRat(){
             elem[i].style.transition = "top 20s"
             elem[i].style.webkitAnimationPlayState = 'running';
             elem[i].style.top = "100%"
-            elem[i].style.left = (Math.floor(Math.random() * 100)).toString()+"%"
+            elem[i].style.left = (Math.floor(Math.random() * 80)).toString()+"%"
         },400*i)
     }
 }

@@ -930,33 +930,43 @@ function isFromge(){
 
 }
 
+is_load = null;
+function is_script_load(){
+    ++is_load;
+    if (is_load>3){
+        document.getElementById('pressenter_text').innerHTML = "Press enter to continue"
+        document.getElementById('pressenter_text').style.fill = "#000000"
+        game_mod.start_intro_screen()
+    }
+}
 
 async function gameStart(){
 
     if(game_is_running==false){
         game_is_running = true
+        is_load = 0;
+
         var divout = document.getElementById('gamecanbehere')
-    
+
         let head = document.getElementsByTagName('head')[0];
         let script2 = document.createElement('script');
         script2.src = "https://unpkg.com/gsap@3/dist/MotionPathPlugin.min.js";
-        script2.onload = () => 1; 
+        script2.onload = () => is_script_load(); 
         head.append(script2);
 
         let script = document.createElement('script');
         script.src = "https://unpkg.co/gsap@3/dist/gsap.min.js";
-        script.onload = () => 1; 
+        script.onload = () => is_script_load(); 
         head.append(script);
 
         await fetch("pages/gameRat.html")
         .then(response=> response.text())
         .then(text=> divout.innerHTML = text)
+        .then(is_script_load())
 
         game_mod = await import("./script_game.js")
-        game_mod.start_intro_screen()
-        document.getElementById('ratdoodle').style.opacity = 0;
-        document.getElementById('badrat').style.opacity = 0;
-        document.getElementById('Fromage').style.opacity = 0;
+        .then(is_script_load())
+        
     }
 }
 
