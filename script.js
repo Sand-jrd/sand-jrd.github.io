@@ -575,7 +575,7 @@ function NextMap(){
     svg.setAttribute('height', `${(4057*1.5)}`);
     svg.setAttribute('width', `${(5000*1.5)}`);
 
-    var elem = ["bruxelles","leiden","nice","frejus","garching","leuven","luxembourg","garching","losangeles","santabarbra","leuven"].reverse()//document.getElementsByClassName('map_elem')
+    var elem = ["bruxelles","leiden","nice","frejus","garching","leuven","luxembourg","garching","losangeles","santabarbra","leuven","villarssurollon","ringbergcastle"].reverse()//document.getElementsByClassName('map_elem')
     id = localStorage['last_com'] || 0
 
     localStorage['last_com'] =  Number(id)+1
