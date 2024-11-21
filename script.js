@@ -930,14 +930,27 @@ function isFromge(){
 
 }
 
-is_load = null;
-function is_script_load(){
-    ++is_load;
-    if (is_load>3){
+is_load = false;
+timeout_interval_left_after_end = null;
+function is_script_load(module_loaded=null){
+    if (module_loaded!=null){game_mod=module_loaded}
+    timeout=0;
+    if (is_load<3 && timeout_interval_left_after_end==false || game_mod==null){
+        timeout_interval = setInterval(function(){
+            timeout+=1
+            if(timeout>1000){
+                document.getElementById('pressenter_text').innerHTML = "Failed to load. Try to refresh"
+                clearInterval(timeout_interval)
+                is_script_load()
+            }
+        },10)
+    }else{
+        timeout_interval_left_after_end=true;
         document.getElementById('pressenter_text').innerHTML = "Press enter to continue"
         document.getElementById('pressenter_text').style.fill = "#000000"
-        game_mod.start_intro_screen()
+        game_mod.start_intro_screen()    
     }
+    return;
 }
 
 async function gameStart(){
@@ -951,22 +964,21 @@ async function gameStart(){
         let head = document.getElementsByTagName('head')[0];
         let script2 = document.createElement('script');
         script2.src = "https://unpkg.com/gsap@3/dist/MotionPathPlugin.min.js";
-        script2.onload = () => is_script_load(); 
+        script2.onload = () => ++is_load;
         head.append(script2);
 
         let script = document.createElement('script');
         script.src = "https://unpkg.co/gsap@3/dist/gsap.min.js";
-        script.onload = () => is_script_load(); 
+        script.onload = () => ++is_load; 
         head.append(script);
 
         await fetch("pages/gameRat.html")
         .then(response=> response.text())
         .then(text=> divout.innerHTML = text)
-        .then(is_script_load())
+        .then(++is_load)
 
         game_mod = await import("./script_game.js")
-        .then(is_script_load())
-        
+        .then(is_script_load(game_mod))        
     }
 }
 
