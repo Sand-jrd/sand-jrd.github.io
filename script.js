@@ -220,52 +220,8 @@ $(document).ready(function() {
 const button = document.getElementById('currentpage');
 
     var url = window.location.href;
-    if (url.includes('page=')==false){
-        var link = 'into';
-        window.location.href = window.location.origin+"?page="+link;
-    }
-
-    var link = url.substring(5+url.indexOf('page='))
-    gotosec(link)
-
-    if (link == "publi"){
-        loadpub();
-        autoScroll();
-    }
-
-    if (link == "com"){
-        setMap()
-        HomeMap()
-        setHeight() 
-        window.addEventListener("resize", setHeight);
-    }
-    if (link == "proj"){
-        autoScroll();
-    }
-
-});
-
- async function gotosec(link){
-
-    surl="pages/"+link+".html"
-    const button = document.getElementById('currentpage');
-
-    await fetch(surl)
-    .then(response=> response.text())
-    .then(text=> button.innerHTML = text);
-
-    try{
-    var oldpage = document.getElementById("topnav").getElementsByClassName("active")[0]
-    oldpage.className = "unactive";
-    }
-    catch(error){
-        console.error("No page:", error);
-    }
-
-
-    var newpage = document.getElementById(link)
-    newpage.className = "active";
-
+    var link = url.substring(6+url.indexOf('pages/')).slice(0, -5);
+    
     var navbar = document.getElementById("topnav");
     var headband = document.getElementById("head-band");
     var barcolor = document.getElementsByClassName("rounded")[0];
@@ -287,10 +243,7 @@ const button = document.getElementById('currentpage');
         autoScroll();
     }
 
-
-    localStorage['last_page'] = link
-
-}
+});
 
 // -------- Srcoll of images --------
 
@@ -466,7 +419,7 @@ async function setMap(){
                     op += op + 0.000005;
                 }, 20);
 
-                await fetch("map_places/"+elem[i].id+".html")
+                await fetch("../map_places/"+elem[i].id+".html")
                 .then(response=> response.text())
                 .then(text=>  document.getElementById('legend-text').innerHTML = text)
                 .then(elemHighlight(elem[i]))  
@@ -486,7 +439,7 @@ async function setMap(){
                     op += op + 0.000005;
                 }, 70);
 
-                await fetch("map_places/"+elem[i].id+".html")
+                await fetch("../map_places/"+elem[i].id+".html")
                 .then(response=> response.text())
                 .then(text=>  document.getElementById('legend-text').innerHTML = text)
                 .then(elemHighlight(elem[i]))  
@@ -600,7 +553,7 @@ function NextMap(){
     }, 70);
 
     document.getElementById('nextmap').value = "Next conf. "+( parseFloat(id)+1).toString()+"/"+(elem.length).toString()
-    fetch("map_places/"+elem[id]+".html")
+    fetch("../map_places/"+elem[id]+".html")
     .then(response=> response.text())
     .then(text=>  document.getElementById('legend-text').innerHTML = text)
     .then(elemHighlight(document.getElementById(elem[id])))
@@ -642,7 +595,7 @@ function NextMapWork(){
     }, 70);
 
     document.getElementById('nextmapwork').value = "Next Work/Education "+( parseFloat(id)+1).toString()+"/"+(elem.length).toString()
-    fetch("map_places/"+elem[id]+".html")
+    fetch("../map_places/"+elem[id]+".html")
     .then(response=> response.text())
     .then(text=>  document.getElementById('legend-text').innerHTML = text)
     .then(elemHighlight(document.getElementById(elem[id])))
@@ -652,7 +605,7 @@ function NextMapWork(){
 
 function ResetLegend(){
 
-    fetch("map_places/default.html")
+    fetch("../map_places/default.html")
     .then(response=> response.text())
     .then(text=>  document.getElementById('legend-text').innerHTML = text);
 
