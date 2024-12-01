@@ -211,17 +211,11 @@ function pageInit(){
 
 
 
-    // -------- Nav bar --------
+    // -------- Page specif interativity --------
     const button = document.getElementById('currentpage');
 
     var url = window.location.href;
     var link = url.substring(6+url.indexOf('pages/')).slice(0, -5);
-
-    var navbar = document.getElementById("topnav");
-    var headband = document.getElementById("head-band");
-    var barcolor = document.getElementsByClassName("rounded")[0];
-    headband.style["background-color"] = barcolor.style["background-color"];
-    navbar.style["background-color"] = barcolor.style["background-color"];
 
     if (link == "publi"){
         loadpub();
