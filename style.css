@@ -678,6 +678,7 @@ opacity: 1;
     
 
 .happyrat{
+    pointer-events: none;
     position: absolute;
     transition: top 20s ease 20s;
     transition: left 20s ease 20s;
