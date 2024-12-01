@@ -188,18 +188,18 @@ function All(){
 function suiv(){alert("Not implemented");}
 function prev(){alert("Not implemented");}
 
-// -------- Line under titles --------
-$(document).ready(function() {
-    
+function pageInit(){
+
+    // -------- Line under titles --------
     // Get max width
     var max = 0;
     var width = 0
     for (var i = 0; i < document.getElementsByClassName("sec").length; i++) {
-    
+
         width = document.getElementsByClassName("sec")[i].clientWidth
         if (width*1 > max*1){ max = width;}
     };
-    
+
     // Set width to all bars
     for (var i = 0; i < document.getElementsByClassName("rounded").length; i++) {
         document.getElementsByClassName("rounded")[i].style.width = (max+50)+'px';
@@ -210,18 +210,13 @@ $(document).ready(function() {
     localStorage['last_work'] = 0
 
 
-});
 
-
-// -------- Nav bar --------
-
-$(document).ready(function() {
-
-const button = document.getElementById('currentpage');
+    // -------- Nav bar --------
+    const button = document.getElementById('currentpage');
 
     var url = window.location.href;
     var link = url.substring(6+url.indexOf('pages/')).slice(0, -5);
-    
+
     var navbar = document.getElementById("topnav");
     var headband = document.getElementById("head-band");
     var barcolor = document.getElementsByClassName("rounded")[0];
@@ -230,7 +225,6 @@ const button = document.getElementById('currentpage');
 
     if (link == "publi"){
         loadpub();
-        autoScroll();
     }
 
     if (link == "com"){
@@ -241,12 +235,11 @@ const button = document.getElementById('currentpage');
     }
     if (link == "proj"){
         autoScroll();
-    }
-
-});
+        }
+}
 
 // -------- Srcoll of images --------
-
+  
 var scrollHandler = null;
 function autoScroll () {
     localStorage['image_isover'] = false
