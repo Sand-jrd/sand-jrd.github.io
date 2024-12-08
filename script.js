@@ -233,7 +233,7 @@ function pageInit(){
         
     if (link == "poster"){
         var param = url.substring(8+url.indexOf('?poster='));
-        PDFObject.embed("../poster/"+param+".pdf", "#my-pdf")
+        PDFObject.embed("../poster/"+param+".pdf", "#my-pdf", {pdfOpenParams: { view:"Fit"}})
     }
 }
 
