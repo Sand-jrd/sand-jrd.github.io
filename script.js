@@ -215,7 +215,7 @@ function pageInit(){
     const button = document.getElementById('currentpage');
 
     var url = window.location.href;
-    var link = url.substring(6+url.indexOf('pages/')).slice(0, -5);
+    var link = url.substring(6+url.indexOf('pages/')).slice(0, url.indexOf('.html') - url.length);
 
     if (link == "publi"){
         loadpub();
@@ -230,6 +230,11 @@ function pageInit(){
     if (link == "proj"){
         autoScroll();
         }
+        
+    if (link == "poster"){
+        var param = url.substring(8+url.indexOf('?poster='));
+        PDFObject.embed("../poster/"+param+".pdf", "#my-pdf")
+    }
 }
 
 // -------- Srcoll of images --------
